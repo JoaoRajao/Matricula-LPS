@@ -1,16 +1,11 @@
-@startuml
-!define RECTANGLE skinparam rectangle {
-    FontColor #0033cc
-    BackgroundColor #f2f2f2
-    BorderColor #0033cc
-}
+
 
 actor "Aluno" as aluno
 actor "Professor" as professor
 actor "Secretaria" as secretaria
 actor "Sistema de Cobranças" as cobranca
 
-rectangle "Sistema de Matrículas" as sistema {
+
     usecase "Realizar Matrícula" as UC1
     usecase "Cancelar Matrícula" as UC2
     usecase "Consultar Disciplinas" as UC3
@@ -20,7 +15,7 @@ rectangle "Sistema de Matrículas" as sistema {
     usecase "Gerenciar Professores" as UC7
     usecase "Gerenciar Alunos" as UC8
     usecase "Notificar Cobrança" as UC9
-}
+
 
 aluno --> UC1
 aluno --> UC2
