@@ -3,7 +3,7 @@
 actor "Aluno" as aluno
 actor "Professor" as professor
 actor "Secretaria" as secretaria
-actor "Sistema de Cobranças" as cobranca
+
 
 
     usecase "Realizar Matrícula" as UC1
@@ -25,7 +25,6 @@ secretaria --> UC5
 secretaria --> UC6
 secretaria --> UC7
 secretaria --> UC8
-UC1 --> cobranca : "Notifica Cobrança"
-UC2 --> cobranca : "Notifica Cancelamento"
+
 
 @enduml
