@@ -7,7 +7,7 @@
 ### Critérios de Aceitação:
 1. O aluno pode selecionar até 4 disciplinas obrigatórias e 2 optativas.
 2. O sistema deve impedir a matrícula em disciplinas já lotadas (60 alunos).
-3. A matrícula só é efetivada se o aluno estiver logado.
+3. A matrícula só é efetivada se o aluno estiver matriculado.
 
 ### História de Usuário 2: Consultar Alunos
 
@@ -27,4 +27,4 @@
 
 ### Critérios de Aceitação:
 1. A secretaria pode adicionar novas disciplinas e removê-las conforme necessário.
-2. O sistema deve notificar a secretaria caso uma disciplina não atinja o número mínimo de alunos (3) até o final do período de matrícula.
+
