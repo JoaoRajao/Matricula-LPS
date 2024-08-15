@@ -5,9 +5,10 @@
 **Para** garantir que estou matriculado nas disciplinas necessárias para meu curso.
 
 ### Critérios de Aceitação:
-1. O aluno pode selecionar até 4 disciplinas obrigatórias e 2 optativas.
-2. O sistema deve impedir a matrícula em disciplinas já lotadas (60 alunos).
-3. A matrícula só é efetivada se o aluno estiver matriculado.
+1. O sistema só pode permitir a inclusão/exclusão das disciplinas durante o período de matrícula.
+2. O aluno pode selecionar até 4 disciplinas obrigatórias e 2 optativas.
+3. O sistema deve impedir a matrícula em disciplinas já lotadas (60 alunos).
+4. A matrícula só é efetivada se o aluno estiver matriculado.
 
 ### História de Usuário 2: Consultar Alunos
 
