@@ -1,11 +1,11 @@
+@startuml
+left to right direction
 
-
-actor "Aluno" as aluno
-actor "Professor" as professor
 actor "Secretaria" as secretaria
+actor "Professor" as professor
+actor "Aluno" as aluno
 
-
-
+rectangle Sistema {
     usecase "Realizar Matrícula" as UC1
     usecase "Cancelar Matrícula" as UC2
     usecase "Consultar Disciplinas" as UC3
@@ -15,16 +15,16 @@ actor "Secretaria" as secretaria
     usecase "Gerenciar Professores" as UC7
     usecase "Gerenciar Alunos" as UC8
     usecase "Notificar Cobrança" as UC9
-
+}
 
 aluno --> UC1
 aluno --> UC2
 aluno --> UC3
+UC1 ..> UC9 :<<include>>
 professor --> UC4
 secretaria --> UC5
 secretaria --> UC6
 secretaria --> UC7
 secretaria --> UC8
-
 
 @enduml
