@@ -10,6 +10,8 @@
 3. Só será possível, para o aluno, se matricular em disciplinas não lotadas (menos de 60 alunos).
 4. A matrícula só é efetivada se o aluno estiver matriculado.
 
+**Prioridade** ALTA
+
 ### História de Usuário 2: Consultar Alunos
 
 **Como** Professor,  
@@ -20,6 +22,8 @@
 1. O professor deve poder visualizar a lista de alunos de cada disciplina em que leciona.
 2. A lista deve incluir nome e número de matrícula dos alunos.
 
+**Prioridade** MEDIA
+
 ### História de Usuário 3: Gerenciar Currículo
 
 **Como** Secretaria,  
@@ -28,4 +32,6 @@
 
 ### Critérios de Aceitação:
 1. A secretaria pode adicionar novas disciplinas e removê-las conforme necessário.
+
+**Prioridade** ALTA
 
