@@ -4,8 +4,9 @@ left to right direction
 actor "Secretaria" as secretaria
 actor "Professor" as professor
 actor "Aluno" as aluno
+actor "Financeiro" as financeiro
 
-rectangle Sistema {
+rectangle "Sistema de Matrícula" {
     usecase "Realizar Matrícula" as UC1
     usecase "Cancelar Matrícula" as UC2
     usecase "Consultar Disciplinas" as UC3
@@ -17,6 +18,10 @@ rectangle Sistema {
     usecase "Notificar Cobrança" as UC9
 }
 
+rectangle "Sistema de Cobrança"{
+    usecase "Cobrar \nMensalidade" as UC10
+}
+
 aluno --> UC1
 aluno --> UC2
 aluno --> UC3
@@ -26,5 +31,6 @@ secretaria --> UC5
 secretaria --> UC6
 secretaria --> UC7
 secretaria --> UC8
-
+UC10 .up.> UC9 :<<include>>
+financeiro -up-> UC10
 @enduml
