@@ -1,0 +1,83 @@
+@startuml
+
+class "Aluno" as aluno {
+     'Atributos'
+     - nome: String
+     - matricula: String
+     - disciplinas: List<Disciplina>
+
+     'Métodos'
+     + Aluno( String, String )
+     + getNome() : String
+     + getMatricula(): String
+     + getDisciplinas(): List<Disciplina>
+     + setNome( String ): Void
+     + setMatricula( String ): Void
+     + matricularDisciplina( Disciplina ): Void
+     + cancelarMatricula( Disciplina ): Void
+}
+
+class "Curso" as curso{
+    'Atributos'
+    - nome: String
+    - creditos: int
+    - disciplinas: List<Disciplina>
+
+    'Métodos'
+    + Curso( String, int )
+    + getNome(): String
+    + getCreditos(): int
+    + getDisciplinas(): List<Disciplina>
+    + setNome( String ): void
+    + setCreditos( int ): void
+    + adicionarDisciplina( Disciplina ): void
+}
+
+class "Disciplina" as disciplina {
+    'Atributos'
+    - nome: String
+    - creditos: int
+    - professor: Professor
+    - alunos: List<Aluno>
+    - {static} maxAlunos: int
+    - {static} minAlunos: int
+
+    'Métodos'
+     + Disciplina( String, int, Professor )
+     + getNome(): String
+     + getCreditos(): int
+     + getProfessor(): Professor
+     + getAlunos(): List<Aluno>
+     + setNome( String ): void
+     + setCreditos( int ): void
+     + setProfessor( Professor ): void
+     + adicionarAluno( Aluno ):  boolean
+     + removerAluno( Aluno ):  boolean
+     + isAtiva(): boolean
+}
+
+
+class "Professor" as professor {
+    'Atributos'
+    - nome: String
+    - id: String
+    - disciplinas: List<Disciplina>
+
+    'Métodos'
+    + Professor( String , String )
+    + getNome(): String
+    + setNome( String ): void
+    + getId(): String
+    + setId( String ): void
+    + getDisciplinas(): List<Disciplina>
+    + adicionarDisciplina( Disciplina ): void
+}
+
+'TODO'
+'Relacionamentos'
+
+'Documentação Setas: https://plantuml.com/en-dark/class-diagram#9dd2a6eca0c2a0e7'
+'Documentação Orientação Seta: https://plantuml.com/en-dark/class-diagram#5a6e75f1261e3d91'
+'Documentação Labels: https://plantuml.com/en-dark/class-diagram#4a705b44651caa59'
+
+@enduml
