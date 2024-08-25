@@ -23,12 +23,6 @@ public class ProfessorController {
         return professorDAO.carregarProfessores();
     }
 
-    public void adicionarDisciplinaAoProfessor(Disciplina disciplina, Professor professor) {
-        if (!professor.getDisciplinas().contains(disciplina)) {
-            professor.getDisciplinas().add(disciplina);
-        }
-    }
-
     public List<String> visualizarDisciplinasLecionadas(Professor professor) {
         return professor.getDisciplinas().stream()
                 .map(Disciplina::getNome)

@@ -18,6 +18,7 @@ public class SecretariaControllerTest {
     private Secretaria secretaria;
     private Curso curso;
     private Professor professor;
+    private Professor professor1;
     private Disciplina disciplina;
     private Aluno aluno;
 
@@ -27,6 +28,7 @@ public class SecretariaControllerTest {
         secretaria = new Secretaria("admin", "senha123");
         curso = new Curso("Engenharia de Software", 240);
         professor = new Professor("Dr. Pedro", "P01", "pedro", "senha789");
+        professor1 = new Professor("Dr. Pedro", "P01", "pedro", "senha789");
         disciplina = new Disciplina("Algoritmos", 4, professor);
         aluno = new Aluno("João", "20220001", curso, "joao", "senha123");
     }
@@ -87,5 +89,12 @@ public class SecretariaControllerTest {
         List<Aluno> alunos = secretariaController.listarAlunos(secretaria);
         assertEquals(1, alunos.size());
         assertEquals(aluno, alunos.get(0));
+    }
+
+    @Test
+    public void testAdicionarDisciplinaAoProfessor() {
+
+        secretariaController.adicionarDisciplinaAoProfessor(disciplina, professor1);
+        assertTrue(professor1.getDisciplinas().contains(disciplina));
     }
 }

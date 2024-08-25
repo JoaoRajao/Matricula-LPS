@@ -13,6 +13,7 @@ import static org.junit.Assert.*;
 
 public class ProfessorControllerTest {
 
+
     private ProfessorController professorController;
     private Professor professor1;
     private Professor professor2;
@@ -20,6 +21,7 @@ public class ProfessorControllerTest {
 
     @Before
     public void setUp() {
+
         professorController = new ProfessorController();
         professor1 = new Professor("Dr. Pedro", "1", "pedro", "senha789");
         professor2 = new Professor("Dra. Ana", "2", "ana", "senha456");
@@ -56,17 +58,12 @@ public class ProfessorControllerTest {
         assertTrue(professorEncontrado);
     }
 
-    @Test
-    public void testAdicionarDisciplinaAoProfessor() {
 
-        professorController.adicionarDisciplinaAoProfessor(disciplina, professor1);
-        assertTrue(professor1.getDisciplinas().contains(disciplina));
-    }
 
     @Test
     public void testVisualizarDisciplinasLecionadas() {
 
-        professorController.adicionarDisciplinaAoProfessor(disciplina, professor1);
+        SecretariaController.adicionarDisciplinaAoProfessor(disciplina, professor1);
 
         List<String> disciplinas = professorController.visualizarDisciplinasLecionadas(professor1);
 

@@ -42,6 +42,12 @@ public class SecretariaController {
         }
     }
 
+    public static void adicionarDisciplinaAoProfessor(Disciplina disciplina, Professor professor) {
+        if (!professor.getDisciplinas().contains(disciplina)) {
+            professor.getDisciplinas().add(disciplina);
+        }
+    }
+
     public void adicionarAluno(Secretaria secretaria, Aluno aluno) {
         List<Aluno> alunos = secretaria.getAlunos();
         if (!alunos.contains(aluno)) {
