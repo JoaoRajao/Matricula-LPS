@@ -6,14 +6,13 @@ class Aluno {
     - String matricula
     - Curso curso
     - List<Disciplina> disciplinasMatriculadas
-    + Aluno(String nome, String matricula, Curso curso)
-    + String getNome() : String
-    + void setNome(String nome) : void
-    + String getMatricula() : String
-    + void setMatricula(String matricula) : void
-    + Curso getCurso() : Curso
-    + void setCurso(Curso curso) : void
-    + List<Disciplina> getDisciplinasMatriculadas() : List<Disciplina>
+    - String login
+    - String senha
+
+    + Aluno(String nome, String matricula, Curso curso, String login, String senha)
+    + void salvarAluno() : void
+    + static List<Aluno> carregarAlunos() : List<Aluno>
+    + static void atualizarArquivo(List<Aluno> alunos) : void
     + void matricularDisciplina(Disciplina disciplina) : void
     + void cancelarMatricula(Disciplina disciplina) : void
     + List<String> visualizarDisciplinasMatriculadas() : List<String>
@@ -24,13 +23,14 @@ class Curso {
     - String nome
     - int creditos
     - List<Disciplina> disciplinas
+
     + Curso(String nome, int creditos)
-    + String getNome() : String
-    + void setNome(String nome) : void
-    + int getCreditos() : int
-    + void setCreditos(int creditos) : void
-    + List<Disciplina> getDisciplinas() : List<Disciplina>
     + void adicionarDisciplina(Disciplina disciplina) : void
+    + void removerDisciplina(Disciplina disciplina) : void
+    + static List<Curso> carregarCursos() : List<Curso>
+    + void salvarCurso() : void
+    + static void atualizarArquivo(List<Curso> cursos) : void
+    + List<Disciplina> getDisciplinas() : List<Disciplina>
     + String toString() : String
 }
 
@@ -41,31 +41,30 @@ class Disciplina {
     - List<Aluno> alunos
     - final int maxAlunos = 60
     - final int minAlunos = 3
+
     + Disciplina(String nome, int creditos, Professor professor)
-    + String getNome() : String
-    + void setNome(String nome) : void
-    + int getCreditos() : int
-    + void setCreditos(int creditos) : void
-    + Professor getProfessor() : Professor
-    + void setProfessor(Professor professor) : void
-    + List<Aluno> getAlunos() : List<Aluno>
     + boolean adicionarAluno(Aluno aluno) : boolean
     + boolean removerAluno(Aluno aluno) : boolean
     + boolean isAtiva() : boolean
+    + static List<Disciplina> carregarDisciplinas() : List<Disciplina>
+    + void salvarDisciplina() : void
+    + static void atualizarArquivo(List<Disciplina> disciplinas) : void
     + String toString() : String
 }
 
 class Professor {
     - String nome
     - String id
+    - String login
+    - String senha
     - List<Disciplina> disciplinas
-    + Professor(String nome, String id)
-    + String getNome() : String
-    + void setNome(String nome) : void
-    + String getId() : String
-    + void setId(String id) : void
-    + List<Disciplina> getDisciplinas() : List<Disciplina>
+
+    + Professor(String nome, String id, String login, String senha)
+    + void adicionarDisciplina(Disciplina disciplina) : void
     + List<String> visualizarDisciplinasLecionadas() : List<String>
+    + static List<Professor> carregarProfessores() : List<Professor>
+    + void salvarProfessor() : void
+    + static void atualizarArquivo(List<Professor> professores) : void
     + String toString() : String
 }
 
@@ -74,22 +73,28 @@ class Secretaria {
     - List<Disciplina> disciplinas
     - List<Professor> professores
     - List<Aluno> alunos
-    + Secretaria()
-    + List<Curso> getCursos() : List<Curso>
-    + void adicionarCurso(Curso curso) : void
-    + void removerCurso(Curso curso) : void
-    + List<Disciplina> getDisciplinas() : List<Disciplina>
-    + void adicionarDisciplina(Disciplina disciplina) : void
-    + void removerDisciplina(Disciplina disciplina) : void
-    + List<Professor> getProfessores() : List<Professor>
-    + void adicionarProfessor(Professor professor) : void
-    + void removerProfessor(Professor professor) : void
-    + List<Aluno> getAlunos() : List<Aluno>
-    + void adicionarAluno(Aluno aluno) : void
-    + void removerAluno(Aluno aluno) : void
-    + void adicionarDisciplinaAoProfessor(Disciplina disciplina, Professor professor) : void
-}
+    - String login
+    - String senha
 
+    + Secretaria(String login, String senha)
+    + void adicionarCurso(Curso curso) : void
+    + void adicionarDisciplina(Disciplina disciplina) : void
+    + void adicionarProfessor(Professor professor) : void
+    + void adicionarAluno(Aluno aluno) : void
+    + void removerCurso(Curso curso) : void
+    + void removerDisciplina(Disciplina disciplina) : void
+    + void removerProfessor(Professor professor) : void
+    + void removerAluno(Aluno aluno) : void
+    + static void adicionarDisciplinaAoProfessor(Disciplina disciplina, Professor professor) : void
+    + static List<Secretaria> carregarSecretarias() : List<Secretaria>
+    + void salvarSecretaria() : void
+    + static void atualizarArquivo(List<Secretaria> secretarias) : void
+    + List<Curso> listarCursos() : List<Curso>
+    + List<Professor> listarProfessores() : List<Professor>
+    + List<Disciplina> listarDisciplinas() : List<Disciplina>
+    + List<Aluno> listarAlunos() : List<Aluno>
+    + String toString() : String
+}
 Aluno "0..*" --> "0..*" Disciplina
 Aluno "0..*" --> "1" Curso
 Disciplina "0..*" --> "1" Professor

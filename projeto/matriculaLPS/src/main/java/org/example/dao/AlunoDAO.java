@@ -29,7 +29,7 @@ public class AlunoDAO {
 
                 if (dados.length < 5) {
                     System.out.println("Linha com formato incorreto: " + linha);
-                    continue; // Ignora esta linha e passa para a próxima
+                    continue;
                 }
 
 
