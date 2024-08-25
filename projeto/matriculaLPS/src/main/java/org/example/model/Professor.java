@@ -1,7 +1,5 @@
 package org.example.model;
 
-
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,14 +7,18 @@ public class Professor {
     private String nome;
     private String id;
     private List<Disciplina> disciplinas;
+    private String login;
+    private String senha;
 
-    public Professor(String nome, String id) {
+    public Professor(String nome, String id, String login, String senha) {
         this.nome = nome;
         this.id = id;
+        this.login = login;
+        this.senha = senha;
         this.disciplinas = new ArrayList<>();
     }
 
-  
+
     public String getNome() {
         return nome;
     }
@@ -37,16 +39,28 @@ public class Professor {
         return disciplinas;
     }
 
-    public List<String> visualizarDisciplinasLecionadas() {
-        List<String> nomesDisciplinas = new ArrayList<>();
-        for (Disciplina disciplina : disciplinas) {
-            nomesDisciplinas.add(disciplina.getNome());
-        }
-        return nomesDisciplinas;
+    public void setDisciplinas(List<Disciplina> disciplinas) {
+        this.disciplinas = disciplinas;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 
     @Override
     public String toString() {
-        return nome + ";" + id;
+        return nome + ";" + id + ";" + login + ";" + senha;
     }
 }

@@ -8,11 +8,15 @@ public class Aluno {
     private String matricula;
     private Curso curso;
     private List<Disciplina> disciplinasMatriculadas;
+    private String login;
+    private String senha;
 
-    public Aluno(String nome, String matricula, Curso curso) {
+    public Aluno(String nome, String matricula, Curso curso, String login, String senha) {
         this.nome = nome;
         this.matricula = matricula;
         this.curso = curso;
+        this.login = login;
+        this.senha = senha;
         this.disciplinasMatriculadas = new ArrayList<>();
     }
 
@@ -45,34 +49,28 @@ public class Aluno {
         return disciplinasMatriculadas;
     }
 
-    public void matricularDisciplina(Disciplina disciplina) {
-        if (!disciplinasMatriculadas.contains(disciplina) && disciplina.adicionarAluno(this)) {
-            disciplinasMatriculadas.add(disciplina);
-            System.out.println("Aluno matriculado na disciplina: " + disciplina.getNome());
-        } else {
-            System.out.println("Não foi possível matricular o aluno na disciplina: " + disciplina.getNome());
-        }
+    public void setDisciplinasMatriculadas(List<Disciplina> disciplinasMatriculadas) {
+        this.disciplinasMatriculadas = disciplinasMatriculadas;
     }
 
-    public void cancelarMatricula(Disciplina disciplina) {
-        if (disciplinasMatriculadas.contains(disciplina)) {
-            disciplinasMatriculadas.remove(disciplina);
-            disciplina.removerAluno(this);
-            System.out.println("Matrícula cancelada na disciplina: " + disciplina.getNome());
-        } else {
-            System.out.println("Aluno não está matriculado na disciplina: " + disciplina.getNome());
-        }
+    public String getLogin() {
+        return login;
     }
 
-    public List<String> visualizarDisciplinasMatriculadas() {
-        List<String> nomesDisciplinas = new ArrayList<>();
-        for (Disciplina disciplina : disciplinasMatriculadas) {
-            nomesDisciplinas.add(disciplina.getNome());
-        }
-        return nomesDisciplinas;
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 
     @Override
     public String toString() {
-        return nome + ";" + matricula + ";" + curso.getNome();
-    }}
+        return nome + ";" + matricula + ";" + curso.getNome() + ";" + login + ";" + senha;
+    }
+}

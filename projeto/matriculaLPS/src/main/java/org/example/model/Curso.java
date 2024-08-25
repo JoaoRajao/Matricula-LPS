@@ -14,7 +14,7 @@ public class Curso {
         this.disciplinas = new ArrayList<>();
     }
 
-    
+
     public String getNome() {
         return nome;
     }
@@ -35,15 +35,10 @@ public class Curso {
         return disciplinas;
     }
 
-    public void adicionarDisciplina(Disciplina disciplina) {
-        if (!disciplinas.contains(disciplina)) {
-            disciplinas.add(disciplina);
-            System.out.println("Disciplina adicionada ao curso: " + disciplina.getNome());
-        } else {
-            System.out.println("A disciplina já existe no curso: " + disciplina.getNome());
-        }
+    public void setDisciplinas(List<Disciplina> disciplinas) {
+        this.disciplinas = disciplinas;
     }
-    
+
     @Override
     public String toString() {
         return nome + ";" + creditos;
