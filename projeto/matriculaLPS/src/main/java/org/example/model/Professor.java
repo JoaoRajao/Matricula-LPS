@@ -16,7 +16,7 @@ public class Professor {
         this.disciplinas = new ArrayList<>();
     }
 
-    // Getters e Setters
+  
     public String getNome() {
         return nome;
     }

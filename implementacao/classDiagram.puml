@@ -5,18 +5,19 @@ class Aluno {
     - String nome
     - String matricula
     - Curso curso
-    - List<Disciplina> disciplinas
+    - List<Disciplina> disciplinasMatriculadas
     + Aluno(String nome, String matricula, Curso curso)
-    + String getNome()
-    + void setNome(String nome)
-    + String getMatricula()
-    + void setMatricula(String matricula)
-    + Curso getCurso()
-    + void setCurso(Curso curso)
-    + List<Disciplina> getDisciplinas()
-    + void matricularDisciplina(Disciplina disciplina)
-    + void cancelarMatricula(Disciplina disciplina)
-    + String toString()
+    + String getNome() : String
+    + void setNome(String nome) : void
+    + String getMatricula() : String
+    + void setMatricula(String matricula) : void
+    + Curso getCurso() : Curso
+    + void setCurso(Curso curso) : void
+    + List<Disciplina> getDisciplinasMatriculadas() : List<Disciplina>
+    + void matricularDisciplina(Disciplina disciplina) : void
+    + void cancelarMatricula(Disciplina disciplina) : void
+    + List<String> visualizarDisciplinasMatriculadas() : List<String>
+    + String toString() : String
 }
 
 class Curso {
@@ -24,13 +25,13 @@ class Curso {
     - int creditos
     - List<Disciplina> disciplinas
     + Curso(String nome, int creditos)
-    + String getNome()
-    + void setNome(String nome)
-    + int getCreditos()
-    + void setCreditos(int creditos)
-    + List<Disciplina> getDisciplinas()
-    + void adicionarDisciplina(Disciplina disciplina)
-    + String toString()
+    + String getNome() : String
+    + void setNome(String nome) : void
+    + int getCreditos() : int
+    + void setCreditos(int creditos) : void
+    + List<Disciplina> getDisciplinas() : List<Disciplina>
+    + void adicionarDisciplina(Disciplina disciplina) : void
+    + String toString() : String
 }
 
 class Disciplina {
@@ -41,17 +42,17 @@ class Disciplina {
     - final int maxAlunos = 60
     - final int minAlunos = 3
     + Disciplina(String nome, int creditos, Professor professor)
-    + String getNome()
-    + void setNome(String nome)
-    + int getCreditos()
-    + void setCreditos(int creditos)
-    + Professor getProfessor()
-    + void setProfessor(Professor professor)
-    + List<Aluno> getAlunos()
-    + boolean adicionarAluno(Aluno aluno)
-    + boolean removerAluno(Aluno aluno)
-    + boolean isAtiva()
-    + String toString()
+    + String getNome() : String
+    + void setNome(String nome) : void
+    + int getCreditos() : int
+    + void setCreditos(int creditos) : void
+    + Professor getProfessor() : Professor
+    + void setProfessor(Professor professor) : void
+    + List<Aluno> getAlunos() : List<Aluno>
+    + boolean adicionarAluno(Aluno aluno) : boolean
+    + boolean removerAluno(Aluno aluno) : boolean
+    + boolean isAtiva() : boolean
+    + String toString() : String
 }
 
 class Professor {
@@ -59,13 +60,13 @@ class Professor {
     - String id
     - List<Disciplina> disciplinas
     + Professor(String nome, String id)
-    + String getNome()
-    + void setNome(String nome)
-    + String getId()
-    + void setId(String id)
-    + List<Disciplina> getDisciplinas()
-    + void adicionarDisciplina(Disciplina disciplina)
-    + String toString()
+    + String getNome() : String
+    + void setNome(String nome) : void
+    + String getId() : String
+    + void setId(String id) : void
+    + List<Disciplina> getDisciplinas() : List<Disciplina>
+    + List<String> visualizarDisciplinasLecionadas() : List<String>
+    + String toString() : String
 }
 
 class Secretaria {
@@ -74,18 +75,19 @@ class Secretaria {
     - List<Professor> professores
     - List<Aluno> alunos
     + Secretaria()
-    + List<Curso> getCursos()
-    + void adicionarCurso(Curso curso)
-    + void removerCurso(Curso curso)
-    + List<Disciplina> getDisciplinas()
-    + void adicionarDisciplina(Disciplina disciplina)
-    + void removerDisciplina(Disciplina disciplina)
-    + List<Professor> getProfessores()
-    + void adicionarProfessor(Professor professor)
-    + void removerProfessor(Professor professor)
-    + List<Aluno> getAlunos()
-    + void adicionarAluno(Aluno aluno)
-    + void removerAluno(Aluno aluno)
+    + List<Curso> getCursos() : List<Curso>
+    + void adicionarCurso(Curso curso) : void
+    + void removerCurso(Curso curso) : void
+    + List<Disciplina> getDisciplinas() : List<Disciplina>
+    + void adicionarDisciplina(Disciplina disciplina) : void
+    + void removerDisciplina(Disciplina disciplina) : void
+    + List<Professor> getProfessores() : List<Professor>
+    + void adicionarProfessor(Professor professor) : void
+    + void removerProfessor(Professor professor) : void
+    + List<Aluno> getAlunos() : List<Aluno>
+    + void adicionarAluno(Aluno aluno) : void
+    + void removerAluno(Aluno aluno) : void
+    + void adicionarDisciplinaAoProfessor(Disciplina disciplina, Professor professor) : void
 }
 
 Aluno "0..*" --> "0..*" Disciplina
