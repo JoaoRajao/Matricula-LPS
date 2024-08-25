@@ -21,6 +21,7 @@ public class Aluno {
     }
 
 
+
     public String getNome() {
         return nome;
     }
@@ -68,6 +69,17 @@ public class Aluno {
     public void setSenha(String senha) {
         this.senha = senha;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Aluno) {
+            Aluno aluno = (Aluno) obj;
+            return matricula.toLowerCase().equals(aluno.getMatricula().toLowerCase());
+        } else {
+            return false;
+        }
+    }
+
 
     @Override
     public String toString() {

@@ -3,6 +3,7 @@ package org.example.controller;
 import org.example.model.Aluno;
 import org.example.model.Curso;
 import org.example.model.Disciplina;
+import org.example.model.Professor;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -13,6 +14,8 @@ import static org.junit.Assert.*;
 
 public class AlunoControllerTest {
 
+
+    private Professor professor;
     private AlunoController alunoController;
     private Aluno aluno;
     private Curso curso;
@@ -21,10 +24,11 @@ public class AlunoControllerTest {
     @Before
     public void setUp() {
 
+        professor = new Professor ("Professorteste", "1321", "21121", "121212");
         alunoController = new AlunoController();
         curso = new Curso("Engenharia de Software", 240);
         aluno = new Aluno("João", "20220001", curso, "joao", "senha123");
-        disciplina = new Disciplina("Algoritmos", 4, null);
+        disciplina = new Disciplina("Algoritmos", 4, professor);
     }
 
     @Test
