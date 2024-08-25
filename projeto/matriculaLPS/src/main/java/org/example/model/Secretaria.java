@@ -99,4 +99,12 @@ public class Secretaria {
             System.out.println("O aluno não foi encontrado: " + aluno.getNome());
         }
     }
+    public void adicionarDisciplinaAoProfessor(Disciplina disciplina, Professor professor) {
+        if (!professor.getDisciplinas().contains(disciplina)) {
+            professor.getDisciplinas().add(disciplina);
+            System.out.println("Disciplina " + disciplina.getNome() + " adicionada ao professor " + professor.getNome());
+        } else {
+            System.out.println("O professor já leciona esta disciplina: " + disciplina.getNome());
+        }
+    }
 }

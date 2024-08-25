@@ -1,5 +1,7 @@
 package org.example.model;
 
+
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +16,7 @@ public class Professor {
         this.disciplinas = new ArrayList<>();
     }
 
-    
+    // Getters e Setters
     public String getNome() {
         return nome;
     }
@@ -35,13 +37,12 @@ public class Professor {
         return disciplinas;
     }
 
-    public void adicionarDisciplina(Disciplina disciplina) {
-        if (!disciplinas.contains(disciplina)) {
-            disciplinas.add(disciplina);
-            System.out.println("Disciplina adicionada ao professor: " + disciplina.getNome());
-        } else {
-            System.out.println("O professor já está associado a essa disciplina: " + disciplina.getNome());
+    public List<String> visualizarDisciplinasLecionadas() {
+        List<String> nomesDisciplinas = new ArrayList<>();
+        for (Disciplina disciplina : disciplinas) {
+            nomesDisciplinas.add(disciplina.getNome());
         }
+        return nomesDisciplinas;
     }
 
     @Override
