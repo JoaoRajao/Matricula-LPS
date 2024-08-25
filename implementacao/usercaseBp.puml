@@ -18,9 +18,7 @@ rectangle "Sistema de Matrícula" {
     usecase "Notificar Cobrança" as UC9
 }
 
-rectangle "Sistema de Cobrança"{
-    usecase "Cobrar \nMensalidade" as UC10
-}
+
 
 aluno --> UC1
 aluno --> UC2
@@ -31,6 +29,6 @@ secretaria --> UC5
 secretaria --> UC6
 secretaria --> UC7
 secretaria --> UC8
-UC10 .up.> UC9 :<<include>>
-financeiro -up-> UC10
+
+
 @enduml

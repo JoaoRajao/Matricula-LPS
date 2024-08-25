@@ -1,83 +1,99 @@
 @startuml
+skinparam classAttributeIconSize 0
 
-class "Aluno" as aluno {
-     'Atributos'
-     - nome: String
-     - matricula: String
-     - disciplinas: List<Disciplina>
-
-     'Métodos'
-     + Aluno( String, String )
-     + getNome() : String
-     + getMatricula(): String
-     + getDisciplinas(): List<Disciplina>
-     + setNome( String ): Void
-     + setMatricula( String ): Void
-     + matricularDisciplina( Disciplina ): Void
-     + cancelarMatricula( Disciplina ): Void
+class Aluno {
+    - String nome
+    - String matricula
+    - Curso curso
+    - List<Disciplina> disciplinas
+    + Aluno(String nome, String matricula, Curso curso)
+    + String getNome()
+    + void setNome(String nome)
+    + String getMatricula()
+    + void setMatricula(String matricula)
+    + Curso getCurso()
+    + void setCurso(Curso curso)
+    + List<Disciplina> getDisciplinas()
+    + void matricularDisciplina(Disciplina disciplina)
+    + void cancelarMatricula(Disciplina disciplina)
+    + String toString()
 }
 
-class "Curso" as curso{
-    'Atributos'
-    - nome: String
-    - creditos: int
-    - disciplinas: List<Disciplina>
-
-    'Métodos'
-    + Curso( String, int )
-    + getNome(): String
-    + getCreditos(): int
-    + getDisciplinas(): List<Disciplina>
-    + setNome( String ): void
-    + setCreditos( int ): void
-    + adicionarDisciplina( Disciplina ): void
+class Curso {
+    - String nome
+    - int creditos
+    - List<Disciplina> disciplinas
+    + Curso(String nome, int creditos)
+    + String getNome()
+    + void setNome(String nome)
+    + int getCreditos()
+    + void setCreditos(int creditos)
+    + List<Disciplina> getDisciplinas()
+    + void adicionarDisciplina(Disciplina disciplina)
+    + String toString()
 }
 
-class "Disciplina" as disciplina {
-    'Atributos'
-    - nome: String
-    - creditos: int
-    - professor: Professor
-    - alunos: List<Aluno>
-    - {static} maxAlunos: int
-    - {static} minAlunos: int
-
-    'Métodos'
-     + Disciplina( String, int, Professor )
-     + getNome(): String
-     + getCreditos(): int
-     + getProfessor(): Professor
-     + getAlunos(): List<Aluno>
-     + setNome( String ): void
-     + setCreditos( int ): void
-     + setProfessor( Professor ): void
-     + adicionarAluno( Aluno ):  boolean
-     + removerAluno( Aluno ):  boolean
-     + isAtiva(): boolean
+class Disciplina {
+    - String nome
+    - int creditos
+    - Professor professor
+    - List<Aluno> alunos
+    - final int maxAlunos = 60
+    - final int minAlunos = 3
+    + Disciplina(String nome, int creditos, Professor professor)
+    + String getNome()
+    + void setNome(String nome)
+    + int getCreditos()
+    + void setCreditos(int creditos)
+    + Professor getProfessor()
+    + void setProfessor(Professor professor)
+    + List<Aluno> getAlunos()
+    + boolean adicionarAluno(Aluno aluno)
+    + boolean removerAluno(Aluno aluno)
+    + boolean isAtiva()
+    + String toString()
 }
 
-
-class "Professor" as professor {
-    'Atributos'
-    - nome: String
-    - id: String
-    - disciplinas: List<Disciplina>
-
-    'Métodos'
-    + Professor( String , String )
-    + getNome(): String
-    + setNome( String ): void
-    + getId(): String
-    + setId( String ): void
-    + getDisciplinas(): List<Disciplina>
-    + adicionarDisciplina( Disciplina ): void
+class Professor {
+    - String nome
+    - String id
+    - List<Disciplina> disciplinas
+    + Professor(String nome, String id)
+    + String getNome()
+    + void setNome(String nome)
+    + String getId()
+    + void setId(String id)
+    + List<Disciplina> getDisciplinas()
+    + void adicionarDisciplina(Disciplina disciplina)
+    + String toString()
 }
 
-'TODO'
-'Relacionamentos'
+class Secretaria {
+    - List<Curso> cursos
+    - List<Disciplina> disciplinas
+    - List<Professor> professores
+    - List<Aluno> alunos
+    + Secretaria()
+    + List<Curso> getCursos()
+    + void adicionarCurso(Curso curso)
+    + void removerCurso(Curso curso)
+    + List<Disciplina> getDisciplinas()
+    + void adicionarDisciplina(Disciplina disciplina)
+    + void removerDisciplina(Disciplina disciplina)
+    + List<Professor> getProfessores()
+    + void adicionarProfessor(Professor professor)
+    + void removerProfessor(Professor professor)
+    + List<Aluno> getAlunos()
+    + void adicionarAluno(Aluno aluno)
+    + void removerAluno(Aluno aluno)
+}
 
-'Documentação Setas: https://plantuml.com/en-dark/class-diagram#9dd2a6eca0c2a0e7'
-'Documentação Orientação Seta: https://plantuml.com/en-dark/class-diagram#5a6e75f1261e3d91'
-'Documentação Labels: https://plantuml.com/en-dark/class-diagram#4a705b44651caa59'
-
+Aluno "0..*" --> "0..*" Disciplina
+Aluno "0..*" --> "1" Curso
+Disciplina "0..*" --> "1" Professor
+Curso "1" --> "0..*" Disciplina
+Secretaria "1" --> "0..*" Curso
+Secretaria "1" --> "0..*" Disciplina
+Secretaria "1" --> "0..*" Professor
+Secretaria "1" --> "0..*" Aluno
 @enduml

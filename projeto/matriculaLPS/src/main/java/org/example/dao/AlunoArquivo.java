@@ -10,7 +10,7 @@ public class AlunoArquivo {
 
     private static final String ARQUIVO_ALUNO = "alunos.txt";
 
-    public static List<Aluno> lerAlunos() throws IOException {
+   /* public static List<Aluno> lerAlunos() throws IOException {
         List<String> linhas = ArquivoUtil.lerArquivo(ARQUIVO_ALUNO);
         List<Aluno> alunos = new ArrayList<>();
 
@@ -24,7 +24,7 @@ public class AlunoArquivo {
 
         return alunos;
     }
-
+*/
     public static void salvarAlunos(List<Aluno> alunos) throws IOException {
         List<String> linhas = new ArrayList<>();
 

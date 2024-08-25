@@ -38,9 +38,12 @@ public class Curso {
     public void adicionarDisciplina(Disciplina disciplina) {
         if (!disciplinas.contains(disciplina)) {
             disciplinas.add(disciplina);
+            System.out.println("Disciplina adicionada ao curso: " + disciplina.getNome());
+        } else {
+            System.out.println("A disciplina já existe no curso: " + disciplina.getNome());
         }
     }
-
+    
     @Override
     public String toString() {
         return nome + ";" + creditos;

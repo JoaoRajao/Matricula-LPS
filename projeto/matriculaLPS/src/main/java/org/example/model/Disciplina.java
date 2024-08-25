@@ -49,18 +49,25 @@ public class Disciplina {
         return alunos;
     }
 
-    public boolean adicionarAluno(Aluno aluno) {
+ public boolean adicionarAluno(Aluno aluno) {
         if (alunos.size() < maxAlunos) {
             alunos.add(aluno);
+            System.out.println("Aluno adicionado à disciplina: " + aluno.getNome());
             return true;
         }
+        System.out.println("Não é possível adicionar o aluno. Limite de alunos atingido.");
         return false;
     }
 
     public boolean removerAluno(Aluno aluno) {
-        return alunos.remove(aluno);
+        if (alunos.remove(aluno)) {
+            System.out.println("Aluno removido da disciplina: " + aluno.getNome());
+            return true;
+        }
+        System.out.println("Aluno não está matriculado na disciplina.");
+        return false;
     }
-
+    
     public boolean isAtiva() {
         return alunos.size() >= minAlunos;
     }

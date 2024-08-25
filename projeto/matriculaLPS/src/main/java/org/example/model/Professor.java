@@ -38,6 +38,9 @@ public class Professor {
     public void adicionarDisciplina(Disciplina disciplina) {
         if (!disciplinas.contains(disciplina)) {
             disciplinas.add(disciplina);
+            System.out.println("Disciplina adicionada ao professor: " + disciplina.getNome());
+        } else {
+            System.out.println("O professor já está associado a essa disciplina: " + disciplina.getNome());
         }
     }
 
