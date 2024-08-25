@@ -1,18 +1,4 @@
-João Silva;20220001
-Maria Oliveira;20220002
-João;20220001;Engenharia de Software;joao;senha123
-João;20220001;Engenharia de Software;joao;senha123
-João;20220001;Engenharia de Software;joao;senha123
-João;20220001;Engenharia de Software;joao;senha123
-João;20220001;Engenharia de Software;joao;senha123
-João;20220001;Engenharia de Software;joao;senha123
-João;20220001;Engenharia de Software;joao;senha123
-João;20220001;Engenharia de Software;joao;senha123
-João;20220001;Engenharia de Software;joao;senha123
-João;20220001;Engenharia de Software;joao;senha123
-João;20220001;Engenharia de Software;joao;senha123
-João;20220001;Engenharia de Software;joao;senha123
-João;20220001;Engenharia de Software;joao;senha123
+\João;20220001;Engenharia de Software;joao;senha123
 João;20220001;Engenharia de Software;joao;senha123
 João;20220001;Engenharia de Software;joao;senha123
 João;20220001;Engenharia de Software;joao;senha123

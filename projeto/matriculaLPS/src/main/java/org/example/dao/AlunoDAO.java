@@ -19,16 +19,23 @@ public class AlunoDAO {
         }
     }
 
-    public List<Aluno> carregarAlunos(List<Curso> cursosDisponiveis) {
+    public List<Aluno> carregarAlunos() {
         List<Aluno> alunos = new ArrayList<>();
         try {
             List<String> linhas = ArquivoUtil.lerArquivo(FILE_NAME);
             for (String linha : linhas) {
                 String[] dados = linha.split(";");
-                Curso curso = cursosDisponiveis.stream()
-                        .filter(c -> c.getNome().equals(dados[2]))
-                        .findFirst()
-                        .orElse(null);
+
+
+                if (dados.length < 5) {
+                    System.out.println("Linha com formato incorreto: " + linha);
+                    continue; // Ignora esta linha e passa para a próxima
+                }
+
+
+                Curso curso = new Curso(dados[2], 0);
+
+
                 Aluno aluno = new Aluno(dados[0], dados[1], curso, dados[3], dados[4]);
                 alunos.add(aluno);
             }

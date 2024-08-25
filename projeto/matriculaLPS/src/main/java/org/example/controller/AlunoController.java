@@ -20,8 +20,8 @@ public class AlunoController {
         alunoDAO.salvarAluno(aluno);
     }
 
-    public List<Aluno> carregarAlunos(List<Curso> cursosDisponiveis) {
-        return alunoDAO.carregarAlunos(cursosDisponiveis);
+    public List<Aluno> carregarAlunos() {
+        return alunoDAO.carregarAlunos();
     }
 
     public void matricularDisciplina(Aluno aluno, Disciplina disciplina) {

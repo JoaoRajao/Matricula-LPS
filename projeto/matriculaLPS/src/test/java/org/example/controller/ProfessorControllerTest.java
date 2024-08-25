@@ -40,7 +40,20 @@ public class ProfessorControllerTest {
     public void testAdicionarProfessor() {
         professorController.adicionarProfessor(professor1);
         List<Professor> professores = professorController.carregarProfessores();
-        assertTrue(professores.contains(professor1));
+
+
+        boolean professorEncontrado = false;
+        for (Professor p : professores) {
+            if (p.getNome().equals(professor1.getNome()) &&
+                    p.getId().equals(professor1.getId()) &&
+                    p.getLogin().equals(professor1.getLogin()) &&
+                    p.getSenha().equals(professor1.getSenha())) {
+                professorEncontrado = true;
+                break;
+            }
+        }
+
+        assertTrue(professorEncontrado);
     }
 
     @Test

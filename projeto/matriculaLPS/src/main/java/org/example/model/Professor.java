@@ -60,16 +60,6 @@ public class Professor {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (obj instanceof Professor) {
-            Professor professor = (Professor) obj;
-            return id.toLowerCase().equals(professor.getId().toLowerCase());
-        } else {
-            return false;
-        }
-    }
-
-    @Override
     public String toString() {
         return nome + ";" + id + ";" + login + ";" + senha;
     }
