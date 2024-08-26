@@ -78,7 +78,7 @@ public class SecretariaController {
         if (numAlunosInscritos < disciplina.getMinAlunos()) {
             cancelarDisciplina(disciplina);
             return false;
-        } else if (numAlunosInscritos >= disciplina.getMaxAlunos()) {
+        } else if (numAlunosInscritos <= disciplina.getMaxAlunos()) {
             disciplina.setInscricoesEncerradas(true);
             return true;
         } else {

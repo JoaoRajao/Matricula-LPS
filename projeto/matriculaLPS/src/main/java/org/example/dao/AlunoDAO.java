@@ -47,7 +47,7 @@ public class AlunoDAO {
                 Curso curso = new Curso(nomeCurso, 240);
                 Aluno aluno = new Aluno(nome, matricula, curso, login, senha);
 
-                // Processar disciplinas
+
                 if (dados.length > 5) {
                     String[] disciplinasDados = dados[5].split(",");
                     for (String discData : disciplinasDados) {

@@ -93,4 +93,48 @@ public class SecretariaControllerTest {
         secretariaController.adicionarDisciplinaAoProfessor(disciplina, professor1);
         assertTrue(professor1.getDisciplinas().contains(disciplina));
     }
+
+    @Test
+    public void testVerificarStatusDisciplina_Cancelada() {
+
+        Aluno aluno1 = new Aluno("Ana", "20220001", curso, "ana", "senha123");
+        disciplina.getAlunos().add(aluno1);
+
+        boolean status = secretariaController.verificarStatusDisciplina(disciplina);
+
+        assertFalse(status);
+        assertFalse(disciplina.isAtiva());
+    }
+
+    @Test
+    public void testVerificarStatusDisciplina_Ativa() {
+
+        Aluno aluno1 = new Aluno("Ana", "20220001", curso, "ana", "senha123");
+        Aluno aluno2 = new Aluno("Carlos", "20220002", curso, "carlos", "senha456");
+        Aluno aluno3 = new Aluno("Maria", "20220003", curso, "maria", "senha789");
+
+        disciplina.getAlunos().add(aluno1);
+        disciplina.getAlunos().add(aluno2);
+        disciplina.getAlunos().add(aluno3);
+
+        boolean status = secretariaController.verificarStatusDisciplina(disciplina);
+
+        assertTrue(status);
+        assertTrue(disciplina.isAtiva());
+        assertFalse(disciplina.isInscricoesEncerradas());
+    }
+
+    @Test
+    public void testVerificarStatusDisciplina_InscricoesEncerradas() {
+
+        for (int i = 1; i <= 60; i++) {
+            disciplina.getAlunos().add(new Aluno("Aluno" + i, "2022000" + i, curso, "aluno" + i, "senha" + i));
+        }
+
+        boolean status = secretariaController.verificarStatusDisciplina(disciplina);
+
+        assertTrue(status);
+        assertFalse(disciplina.isAtiva());
+        assertTrue(disciplina.isInscricoesEncerradas());
+    }
 }
