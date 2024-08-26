@@ -71,4 +71,23 @@ public class SecretariaController {
     public List<Aluno> listarAlunos(Secretaria secretaria) {
         return secretaria.getAlunos();
     }
+
+    public boolean verificarStatusDisciplina(Disciplina disciplina) {
+        int numAlunosInscritos = disciplina.getAlunos().size();
+
+        if (numAlunosInscritos < disciplina.getMinAlunos()) {
+            cancelarDisciplina(disciplina);
+            return false;
+        } else if (numAlunosInscritos >= disciplina.getMaxAlunos()) {
+            disciplina.setInscricoesEncerradas(true);
+            return true;
+        } else {
+            disciplina.setAtiva(true);
+            return true;
+        }
+    }
+
+    private void cancelarDisciplina(Disciplina disciplina) {
+        disciplina.setAtiva(false);
+         }
 }

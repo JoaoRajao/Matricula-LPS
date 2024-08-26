@@ -3,6 +3,7 @@ package org.example.controller;
 import org.example.model.Aluno;
 import org.example.model.Curso;
 import org.example.model.Disciplina;
+import org.example.model.TipoDisciplina;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -16,15 +17,22 @@ public class AlunoControllerTest {
     private AlunoController alunoController;
     private Aluno aluno;
     private Curso curso;
-    private Disciplina disciplina;
+    private Disciplina disciplinaObrigatoria;
+    private Disciplina disciplinaOptativa;
+    private List<Disciplina> disciplinas;
 
     @Before
     public void setUp() {
-
         alunoController = new AlunoController();
         curso = new Curso("Engenharia de Software", 240);
         aluno = new Aluno("João", "20220001", curso, "joao", "senha123");
-        disciplina = new Disciplina("Algoritmos", 4, null);
+
+        disciplinaObrigatoria = new Disciplina("Algoritmos", 4, null, TipoDisciplina.OBRIGATORIA);
+        disciplinaOptativa = new Disciplina("Filosofia", 2, null, TipoDisciplina.OPTATIVA);
+
+        disciplinas = new ArrayList<>();
+        disciplinas.add(disciplinaObrigatoria);
+        disciplinas.add(disciplinaOptativa);
     }
 
     @Test
@@ -48,23 +56,37 @@ public class AlunoControllerTest {
     }
 
     @Test
-    public void testMatricularDisciplina() {
-        alunoController.matricularDisciplina(aluno, disciplina);
-        assertTrue(aluno.getDisciplinasMatriculadas().contains(disciplina));
+    public void testMatricularDisciplinas() {
+        alunoController.matricularDisciplinas(aluno, disciplinas);
+        assertTrue(aluno.getDisciplinasObrigatorias().contains(disciplinaObrigatoria));
+        assertTrue(aluno.getDisciplinasOptativas().contains(disciplinaOptativa));
     }
 
     @Test
     public void testCancelarMatricula() {
-        alunoController.matricularDisciplina(aluno, disciplina);
-        alunoController.cancelarMatricula(aluno, disciplina);
-        assertFalse(aluno.getDisciplinasMatriculadas().contains(disciplina));
+        alunoController.matricularDisciplinas(aluno, disciplinas);
+        alunoController.cancelarMatricula(aluno, disciplinaObrigatoria);
+        assertFalse(aluno.getDisciplinasMatriculadas().contains(disciplinaObrigatoria));
     }
 
     @Test
     public void testVisualizarDisciplinasMatriculadas() {
-        alunoController.matricularDisciplina(aluno, disciplina);
-        List<String> disciplinas = alunoController.visualizarDisciplinasMatriculadas(aluno);
-        assertEquals(1, disciplinas.size());
-        assertEquals("Algoritmos", disciplinas.get(0));
+        alunoController.matricularDisciplinas(aluno, disciplinas);
+        List<String> disciplinasMatriculadas = alunoController.visualizarDisciplinasMatriculadas(aluno);
+        assertEquals(2, disciplinasMatriculadas.size());
+        assertTrue(disciplinasMatriculadas.contains("Algoritmos"));
+        assertTrue(disciplinasMatriculadas.contains("Filosofia"));
+    }
+
+    @Test
+    public void testLimiteDeDisciplinas() {
+        List<Disciplina> novasDisciplinas = new ArrayList<>();
+        for (int i = 0; i < 7; i++) {
+            novasDisciplinas.add(new Disciplina("Disciplina " + i, 2, null, TipoDisciplina.OBRIGATORIA));
+        }
+
+        alunoController.matricularDisciplinas(aluno, novasDisciplinas);
+        assertTrue(aluno.getDisciplinasMatriculadas().size() <= 6);
     }
 }
+

@@ -2,6 +2,9 @@ package org.example.dao;
 
 import org.example.model.Aluno;
 import org.example.model.Curso;
+import org.example.model.Disciplina;
+import org.example.model.TipoDisciplina;
+
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -24,36 +27,50 @@ public class AlunoDAO {
         try {
             List<String> linhas = ArquivoUtil.lerArquivo(FILE_NAME);
             for (String linha : linhas) {
+                if (linha.trim().isEmpty()) {
+                    continue;
+                }
+
                 String[] dados = linha.split(";");
-
-
                 if (dados.length < 5) {
                     System.out.println("Linha com formato incorreto: " + linha);
                     continue;
                 }
 
+                String nome = dados[0];
+                String matricula = dados[1];
+                String nomeCurso = dados[2];
+                String login = dados[3];
+                String senha = dados[4];
 
-                Curso curso = new Curso(dados[2], 0);
 
+                Curso curso = new Curso(nomeCurso, 240);
+                Aluno aluno = new Aluno(nome, matricula, curso, login, senha);
 
-                Aluno aluno = new Aluno(dados[0], dados[1], curso, dados[3], dados[4]);
+                // Processar disciplinas
+                if (dados.length > 5) {
+                    String[] disciplinasDados = dados[5].split(",");
+                    for (String discData : disciplinasDados) {
+                        String[] parts = discData.split("\\(");
+                        String nomeDisciplina = parts[0].trim();
+                        String tipoStr = parts[1].substring(0, 1); // Obtém apenas 'O' ou 'P'
+
+                        TipoDisciplina tipo = tipoStr.equals("O") ? TipoDisciplina.OBRIGATORIA : TipoDisciplina.OPTATIVA;
+                        Disciplina disciplina = new Disciplina(nomeDisciplina, 0, null, tipo);
+
+                        if (tipo == TipoDisciplina.OBRIGATORIA) {
+                            aluno.getDisciplinasObrigatorias().add(disciplina);
+                        } else {
+                            aluno.getDisciplinasOptativas().add(disciplina);
+                        }
+                    }
+                }
+
                 alunos.add(aluno);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
         return alunos;
-    }
-
-    public void atualizarArquivo(List<Aluno> alunos) {
-        List<String> linhas = new ArrayList<>();
-        for (Aluno aluno : alunos) {
-            linhas.add(aluno.toString());
-        }
-        try {
-            ArquivoUtil.escreverArquivo(FILE_NAME, linhas);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 }

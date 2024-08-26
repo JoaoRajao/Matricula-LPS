@@ -1,10 +1,6 @@
 package org.example.controller;
 
-import org.example.model.Aluno;
-import org.example.model.Curso;
-import org.example.model.Disciplina;
-import org.example.model.Professor;
-import org.example.model.Secretaria;
+import org.example.model.*;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -29,7 +25,7 @@ public class SecretariaControllerTest {
         curso = new Curso("Engenharia de Software", 240);
         professor = new Professor("Dr. Pedro", "P01", "pedro", "senha789");
         professor1 = new Professor("Dr. Pedro", "P01", "pedro", "senha789");
-        disciplina = new Disciplina("Algoritmos", 4, professor);
+        disciplina = new Disciplina("Algoritmos", 4, null, TipoDisciplina.OBRIGATORIA);
         aluno = new Aluno("João", "20220001", curso, "joao", "senha123");
     }
 

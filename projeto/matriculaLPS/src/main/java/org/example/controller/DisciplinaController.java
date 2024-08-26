@@ -7,6 +7,7 @@ import org.example.model.Professor;
 import java.util.List;
 
 public class DisciplinaController {
+    private List<Aluno> alunos;
 
     public void adicionarAlunoADisciplina(Disciplina disciplina, Aluno aluno) {
         List<Aluno> alunos = disciplina.getAlunos();
@@ -33,4 +34,9 @@ public class DisciplinaController {
     public List<Aluno> listarAlunosDaDisciplina(Disciplina disciplina) {
         return disciplina.getAlunos();
     }
+
+
+
 }
+
+

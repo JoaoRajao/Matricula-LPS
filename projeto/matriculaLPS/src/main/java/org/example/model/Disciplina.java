@@ -8,16 +8,21 @@ public class Disciplina {
     private int creditos;
     private Professor professor;
     private List<Aluno> alunos;
+    private TipoDisciplina tipo;
     private final int maxAlunos = 60;
     private final int minAlunos = 3;
+    private boolean ativa;
+    private boolean inscricoesEncerradas;
 
-    public Disciplina(String nome, int creditos, Professor professor) {
+    public Disciplina(String nome, int creditos, Professor professor, TipoDisciplina tipo) {
         this.nome = nome;
         this.creditos = creditos;
         this.professor = professor;
         this.alunos = new ArrayList<>();
+        this.tipo = tipo;
+        this.ativa = false;
+        this.inscricoesEncerradas = false;
     }
-
 
     public String getNome() {
         return nome;
@@ -47,8 +52,12 @@ public class Disciplina {
         return alunos;
     }
 
-    public void setAlunos(List<Aluno> alunos) {
-        this.alunos = alunos;
+    public TipoDisciplina getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(TipoDisciplina tipo) {
+        this.tipo = tipo;
     }
 
     public int getMaxAlunos() {
@@ -59,8 +68,24 @@ public class Disciplina {
         return minAlunos;
     }
 
+    public boolean isAtiva() {
+        return ativa;
+    }
+
+    public void setAtiva(boolean ativa) {
+        this.ativa = ativa;
+    }
+
+    public boolean isInscricoesEncerradas() {
+        return inscricoesEncerradas;
+    }
+
+    public void setInscricoesEncerradas(boolean inscricoesEncerradas) {
+        this.inscricoesEncerradas = inscricoesEncerradas;
+    }
+
     @Override
     public String toString() {
-        return nome + ";" + creditos + ";" + professor.getId();
+        return nome + ";" + creditos + ";" + professor.getNome() + ";" + tipo;
     }
 }

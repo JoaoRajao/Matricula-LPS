@@ -1,9 +1,9 @@
 package org.example.controller;
 
-import org.example.dao.*;
+import org.example.dao.AlunoDAO;
 import org.example.model.Aluno;
-import org.example.model.Curso;
 import org.example.model.Disciplina;
+import org.example.model.TipoDisciplina;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,8 +14,9 @@ public class AlunoController {
 
     public AlunoController() {
         this.alunoDAO = new AlunoDAO();
-        this.disciplinaController = new DisciplinaController(); // Inicialize a variável aqui
+        this.disciplinaController = new DisciplinaController();
     }
+
     public void adicionarAluno(Aluno aluno) {
         alunoDAO.salvarAluno(aluno);
     }
@@ -24,21 +25,53 @@ public class AlunoController {
         return alunoDAO.carregarAlunos();
     }
 
-    public void matricularDisciplina(Aluno aluno, Disciplina disciplina) {
-        List<Disciplina> disciplinasMatriculadas = aluno.getDisciplinasMatriculadas();
-        if (!disciplinasMatriculadas.contains(disciplina)) {
-            disciplinaController.adicionarAlunoADisciplina(disciplina, aluno); // Adiciona o aluno à disciplina
-            disciplinasMatriculadas.add(disciplina); // Adiciona a disciplina ao aluno
-            alunoDAO.salvarAluno(aluno); // Atualiza o arquivo após a matrícula
+
+
+    public void matricularDisciplinas(Aluno aluno, List<Disciplina> disciplinas) {
+        int totalDisciplinasExistentes = aluno.getDisciplinasMatriculadas().size();
+        int totalObrigatoriasExistentes = aluno.getDisciplinasObrigatorias().size();
+        int totalOptativasExistentes = aluno.getDisciplinasOptativas().size();
+
+        for (Disciplina disciplina : disciplinas) {
+            if (totalDisciplinasExistentes >= 6) {
+                System.out.println("Não é possível matricular em mais de 6 disciplinas no total.");
+                break;
+            }
+
+            if (disciplina.getTipo() == TipoDisciplina.OBRIGATORIA) {
+                if (totalObrigatoriasExistentes >= 4) {
+                    System.out.println("Não é possível matricular em mais de 4 disciplinas obrigatórias.");
+                    continue;
+                }
+                aluno.getDisciplinasObrigatorias().add(disciplina);
+                totalObrigatoriasExistentes++;
+            } else if (disciplina.getTipo() == TipoDisciplina.OPTATIVA) {
+                if (totalOptativasExistentes >= 2) {
+                    System.out.println("Não é possível matricular em mais de 2 disciplinas optativas.");
+                    continue;
+                }
+                aluno.getDisciplinasOptativas().add(disciplina);
+                totalOptativasExistentes++;
+            }
+            totalDisciplinasExistentes++;
         }
+        alunoDAO.salvarAluno(aluno);
     }
 
     public void cancelarMatricula(Aluno aluno, Disciplina disciplina) {
-        List<Disciplina> disciplinasMatriculadas = aluno.getDisciplinasMatriculadas();
-        if (disciplinasMatriculadas.contains(disciplina)) {
-            disciplinaController.removerAlunoDaDisciplina(disciplina, aluno); // Remove o aluno da disciplina
-            disciplinasMatriculadas.remove(disciplina); // Remove a disciplina do aluno
-            alunoDAO.salvarAluno(aluno); // Atualiza o arquivo após o cancelamento
+        boolean removed = false;
+
+        if (aluno.getDisciplinasObrigatorias().contains(disciplina)) {
+            aluno.getDisciplinasObrigatorias().remove(disciplina);
+            removed = true;
+        } else if (aluno.getDisciplinasOptativas().contains(disciplina)) {
+            aluno.getDisciplinasOptativas().remove(disciplina);
+            removed = true;
+        }
+
+        if (removed) {
+            disciplinaController.removerAlunoDaDisciplina(disciplina, aluno);
+            alunoDAO.salvarAluno(aluno);
         }
     }
 

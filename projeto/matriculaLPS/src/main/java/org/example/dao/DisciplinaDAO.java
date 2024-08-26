@@ -2,6 +2,7 @@ package org.example.dao;
 
 import org.example.model.Disciplina;
 import org.example.model.Professor;
+import org.example.model.TipoDisciplina;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -25,11 +26,17 @@ public class DisciplinaDAO {
             List<String> linhas = ArquivoUtil.lerArquivo(FILE_NAME);
             for (String linha : linhas) {
                 String[] dados = linha.split(";");
+                String nomeDisciplina = dados[0];
+                int creditos = Integer.parseInt(dados[1]);
+                String nomeProfessor = dados[2];
+                TipoDisciplina tipo = TipoDisciplina.valueOf(dados[3]); // Ajuste para carregar o tipo de disciplina
+
                 Professor professor = professoresDisponiveis.stream()
-                        .filter(p -> p.getId().equals(dados[2]))
+                        .filter(p -> p.getNome().equals(nomeProfessor))
                         .findFirst()
                         .orElse(null);
-                Disciplina disciplina = new Disciplina(dados[0], Integer.parseInt(dados[1]), professor);
+
+                Disciplina disciplina = new Disciplina(nomeDisciplina, creditos, professor, tipo);
                 disciplinas.add(disciplina);
             }
         } catch (IOException e) {
@@ -37,6 +44,7 @@ public class DisciplinaDAO {
         }
         return disciplinas;
     }
+
 
     public void atualizarArquivo(List<Disciplina> disciplinas) {
         List<String> linhas = new ArrayList<>();

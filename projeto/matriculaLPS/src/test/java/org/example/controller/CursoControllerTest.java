@@ -2,6 +2,7 @@ package org.example.controller;
 
 import org.example.model.Curso;
 import org.example.model.Disciplina;
+import org.example.model.TipoDisciplina;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -19,7 +20,8 @@ public class CursoControllerTest {
     public void setUp() {
         cursoController = new CursoController();
         curso = new Curso("Engenharia de Software", 240);
-        disciplina = new Disciplina("Algoritmos", 4, null);
+        disciplina = new Disciplina("Algoritmos", 4, null, TipoDisciplina.OBRIGATORIA);
+
     }
 
     @Test
