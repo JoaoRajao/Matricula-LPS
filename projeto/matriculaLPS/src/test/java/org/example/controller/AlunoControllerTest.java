@@ -88,5 +88,32 @@ public class AlunoControllerTest {
         alunoController.matricularDisciplinas(aluno, novasDisciplinas);
         assertTrue(aluno.getDisciplinasMatriculadas().size() <= 6);
     }
+
+    @Test
+    public void testAdicionar6Disciplinas() {
+        List<Disciplina> novasDisciplinas = new ArrayList<>();
+
+        for (int i = 0; i < 4; i++) {
+            novasDisciplinas.add(new Disciplina("Disciplina Obrigatória " + i, 2, null, TipoDisciplina.OBRIGATORIA));
+        }
+
+        for (int i = 0; i < 2; i++) {
+            novasDisciplinas.add(new Disciplina("Disciplina Optativa " + i, 2, null, TipoDisciplina.OPTATIVA));
+        }
+
+        alunoController.matricularDisciplinas(aluno, novasDisciplinas);
+        assertTrue(aluno.getDisciplinasMatriculadas().size() == 6);
+
+
+        long countObrigatorias = aluno.getDisciplinasMatriculadas().stream()
+                .filter(disciplina -> disciplina.getTipo() == TipoDisciplina.OBRIGATORIA)
+                .count();
+        long countOptativas = aluno.getDisciplinasMatriculadas().stream()
+                .filter(disciplina -> disciplina.getTipo() == TipoDisciplina.OPTATIVA)
+                .count();
+
+        assertTrue(countObrigatorias == 4);
+        assertTrue(countOptativas == 2);
+    }
 }
 

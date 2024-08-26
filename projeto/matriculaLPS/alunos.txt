@@ -33,3 +33,16 @@ João;20220001;Engenharia de Software;joao;senha123;
 João;20220001;Engenharia de Software;joao;senha123;Algoritmos(O),Filosofia(P)
 João;20220001;Engenharia de Software;joao;senha123;Filosofia(P)
 João;20220001;Engenharia de Software;joao;senha123;Algoritmos(O),Filosofia(P)
+João;20220001;Engenharia de Software;joao;senha123;Disciplina 0(O),Disciplina 1(O),Disciplina 2(O),Disciplina 3(O)
+João;20220001;Engenharia de Software;joao;senha123;Algoritmos(O),Filosofia(P)
+João;20220001;Engenharia de Software;joao;senha123;
+João;20220001;Engenharia de Software;joao;senha123;Algoritmos(O),Filosofia(P)
+João;20220001;Engenharia de Software;joao;senha123;Filosofia(P)
+João;20220001;Engenharia de Software;joao;senha123;Algoritmos(O),Filosofia(P)
+João;20220001;Engenharia de Software;joao;senha123;Disciplina 0(O),Disciplina 1(O),Disciplina 2(O),Disciplina 3(O)
+João;20220001;Engenharia de Software;joao;senha123;Algoritmos(O),Filosofia(P)
+João;20220001;Engenharia de Software;joao;senha123;
+João;20220001;Engenharia de Software;joao;senha123;Algoritmos(O),Filosofia(P)
+João;20220001;Engenharia de Software;joao;senha123;Filosofia(P)
+João;20220001;Engenharia de Software;joao;senha123;Algoritmos(O),Filosofia(P)
+João;20220001;Engenharia de Software;joao;senha123;Disciplina Obrigatória 0(O),Disciplina Obrigatória 1(O),Disciplina Obrigatória 2(O),Disciplina Obrigatória 3(O),Disciplina Optativa 0(P),Disciplina Optativa 1(P)
