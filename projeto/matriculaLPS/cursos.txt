@@ -2,3 +2,4 @@ direito;240
 Engenharia de Software;240
 Engenharia de Software;240
 direito;240
+adm;300;adm5;adm6

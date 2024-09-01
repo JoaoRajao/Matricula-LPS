@@ -2,3 +2,11 @@ cal;2;joao;OBRIGATORIA
 calculo;23;joao;OBRIGATORIA
 popo;2;joao;OBRIGATORIA
 aeds;3;joao;OBRIGATORIA
+adm1;3;joao;OBRIGATORIA
+adm;3;joao;OBRIGATORIA
+adm2;3;joao;OPTATIVA
+adm2;234;2;OBRIGATORIA
+adm2;2;joao;OPTATIVA
+adm4;3;joao;OPTATIVA
+adm5;50;joao;OPTATIVA
+adm6;8;joao;OPTATIVA

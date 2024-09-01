@@ -11,6 +11,9 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class Main {
+    private static ProfessorDAO professorController;
+    private static CursoDAO cursoDAO;
+
     public static void main(String[] args) {
 
         AlunoController alunoController = new AlunoController();
@@ -250,12 +253,32 @@ public class Main {
 
                         Disciplina disciplina = new Disciplina(nomeDisciplina, creditosDisciplina, professorDisciplina, tipoDisciplina);
                         secretariaController.adicionarDisciplina(disciplina);
-
-
                         secretariaController.adicionarDisciplinaAoProfessor(disciplina, professorDisciplina);
+
+
+                        System.out.print("Digite o nome do curso para associar à disciplina: ");
+                        String nomeCursoDisc = scanner.nextLine();
+                        Curso cursoDisciplina = null;
+
+                        List<Curso> cursos = secretariaController.listarCursos();
+                        for (Curso c : cursos) {
+                            if (c.getNome().equalsIgnoreCase(nomeCursoDisc)) {
+                                cursoDisciplina = c;
+                                break;
+                            }
+                        }
+
+                        if (cursoDisciplina != null) {
+                            CursoController cursoController = new CursoController();
+                            cursoController.adicionarDisciplinaAoCurso(cursoDisciplina, disciplina);
+                            System.out.println("Disciplina adicionada ao curso com sucesso!");
+                        } else {
+                            System.out.println("Curso não encontrado. Disciplina não adicionada ao curso.");
+                        }
 
                         System.out.println("Disciplina adicionada e associada ao professor com sucesso!");
                         break;
+
 
 
                     case 4:
@@ -304,9 +327,9 @@ public class Main {
                         break;
 
                     case 6:
-                        List<Curso> cursos = secretariaController.listarCursos();
+                        List<Curso> cursos1 = secretariaController.listarCursos();
                         System.out.println("Cursos disponíveis:");
-                        for (Curso c : cursos) {
+                        for (Curso c : cursos1) {
                             System.out.println(c.getNome() + " - " + c.getCreditos() + " créditos");
                         }
                         break;
@@ -431,7 +454,7 @@ public class Main {
 
                 switch (opcao) {
                     case 1:
-                        // Visualizar Disciplinas Matriculadas
+
                         List<String> disciplinasMatriculadas = alunoController.visualizarDisciplinasMatriculadas(aluno);
                         System.out.println("Disciplinas matriculadas:");
                         for (String d : disciplinasMatriculadas) {
