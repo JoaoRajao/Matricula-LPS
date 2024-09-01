@@ -385,49 +385,40 @@ public class Main {
 
                 switch (opcao) {
                     case 1:
-
-                        List<Disciplina> todasDisciplinas = secretariaController.listarDisciplinas();
-                        List<Disciplina> disciplinasLecionadas = todasDisciplinas.stream()
-                                .filter(d -> d.getProfessor() != null && d.getProfessor().getNome().equals(professor.getNome()))
-                                .collect(Collectors.toList());
+                        List<String> disciplinasLecionadas = professorController.visualizarDisciplinasLecionadas(professor);
 
                         if (disciplinasLecionadas.isEmpty()) {
                             System.out.println("Nenhuma disciplina lecionada encontrada.");
                         } else {
                             System.out.println("Disciplinas lecionadas:");
-                            for (Disciplina disciplina : disciplinasLecionadas) {
-                                System.out.println(disciplina.getNome());
+                            for (String disciplina : disciplinasLecionadas) {
+                                System.out.println(disciplina);
                             }
                         }
                         break;
 
                     case 2:
-//
-//                        List<Disciplina> disciplinasDoProfessor = todasDisciplinas.stream()
-//                                .filter(d -> d.getProfessor() != null && d.getProfessor().getNome().equals(professor.getNome()))
-//                                .collect(Collectors.toList());
-//
-//                        Map<String, List<Aluno>> alunosPorDisciplina = disciplinasDoProfessor.stream()
-//                                .collect(Collectors.toMap(
-//                                        Disciplina::getNome,
-//                                        Disciplina::getAlunos
-//                                ));
-//
-//                        if (alunosPorDisciplina.isEmpty()) {
-//                            System.out.println("Nenhuma disciplina encontrada ou sem alunos matriculados.");
-//                        } else {
-//                            System.out.println("Alunos por disciplina:");
-//                            for (Map.Entry<String, List<Aluno>> entry : alunosPorDisciplina.entrySet()) {
-//                                System.out.println("Disciplina: " + entry.getKey());
-//                                for (Aluno aluno : entry.getValue()) {
-//                                    System.out.println("Aluno: " + aluno.getNome());
-//                                }
-//                            }
-//                        }
-//                        break;
+                        Map<String, List<Aluno>> alunosPorDisciplina = professorController.visualizarAlunosPorDisciplina(professor);
+
+                        if (alunosPorDisciplina.isEmpty()) {
+                            System.out.println("Nenhuma disciplina encontrada ou sem alunos matriculados.");
+                        } else {
+                            System.out.println("Alunos por disciplina:");
+                            for (Map.Entry<String, List<Aluno>> entry : alunosPorDisciplina.entrySet()) {
+                                System.out.println("Disciplina: " + entry.getKey());
+                                List<Aluno> alunos = entry.getValue();
+                                if (alunos.isEmpty()) {
+                                    System.out.println("Nenhum aluno matriculado.");
+                                } else {
+                                    for (Aluno aluno : alunos) {
+                                        System.out.println("Aluno: " + aluno.getNome());
+                                    }
+                                }
+                            }
+                        }
+                        break;
 
                     case 3:
-
                         return;
 
                     default:
@@ -447,14 +438,14 @@ public class Main {
                 System.out.println("\nMenu do Aluno");
                 System.out.println("1. Visualizar Disciplinas Matriculadas");
                 System.out.println("2. Matricular-se em uma Disciplina");
-                System.out.println("3. Voltar ao Menu Principal");
+                System.out.println("3. Cancelar Matrícula em uma Disciplina");
+                System.out.println("4. Voltar ao Menu Principal");
                 System.out.print("Escolha uma opção: ");
 
                 int opcao = Integer.parseInt(scanner.nextLine());
 
                 switch (opcao) {
                     case 1:
-
                         List<String> disciplinasMatriculadas = alunoController.visualizarDisciplinasMatriculadas(aluno);
                         System.out.println("Disciplinas matriculadas:");
                         for (String d : disciplinasMatriculadas) {
@@ -463,10 +454,8 @@ public class Main {
                         break;
 
                     case 2:
-
                         System.out.println("Digite o nome da disciplina que deseja se matricular: ");
                         String nomeDisciplina = scanner.nextLine();
-
 
                         List<Disciplina> todasDisciplinas = alunoController.carregarTodasDisciplinas();
                         Disciplina disciplinaEscolhida = null;
@@ -479,11 +468,9 @@ public class Main {
                         }
 
                         if (disciplinaEscolhida != null) {
-
                             List<Disciplina> disciplinasParaMatricular = new ArrayList<>();
                             disciplinasParaMatricular.add(disciplinaEscolhida);
                             alunoController.matricularDisciplinas(aluno, disciplinasParaMatricular);
-
 
                             alunoController.salvarAluno(aluno);
 
@@ -494,7 +481,27 @@ public class Main {
                         break;
 
                     case 3:
+                        System.out.println("Digite o nome da disciplina que deseja cancelar a matrícula: ");
+                        String nomeDisciplinaCancelar = scanner.nextLine();
 
+                        Disciplina disciplinaParaCancelar = null;
+                        for (Disciplina d : aluno.getDisciplinasMatriculadas()) {
+                            if (d.getNome().equalsIgnoreCase(nomeDisciplinaCancelar)) {
+                                disciplinaParaCancelar = d;
+                                break;
+                            }
+                        }
+
+                        if (disciplinaParaCancelar != null) {
+                            alunoController.cancelarMatricula(aluno, disciplinaParaCancelar);
+                            alunoController.salvarAluno(aluno);
+                            System.out.println("Matrícula na disciplina " + disciplinaParaCancelar.getNome() + " cancelada com sucesso.");
+                        } else {
+                            System.out.println("Disciplina não encontrada ou aluno não está matriculado.");
+                        }
+                        break;
+
+                    case 4:
                         return;
 
                     default:
@@ -507,5 +514,4 @@ public class Main {
             }
         }
     }
-
 }

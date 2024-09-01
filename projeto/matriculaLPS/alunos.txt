@@ -1,1 +1,1 @@
-João;20220001;Engenharia de Software;joao;senha123;calculo(O),calculo(O),cal(O)
+João;20220001;Engenharia de Software;joao;senha123;calculo(O),calculo(O),adm2(O),adm5(P),adm6(P)

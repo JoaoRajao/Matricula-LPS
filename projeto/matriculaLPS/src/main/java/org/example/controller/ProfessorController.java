@@ -1,6 +1,8 @@
+
 package org.example.controller;
 
-import org.example.dao.ProfessorDAO;
+import org.example.dao.*;
+
 import org.example.model.Aluno;
 import org.example.model.Disciplina;
 import org.example.model.Professor;
@@ -12,9 +14,13 @@ import java.util.stream.Collectors;
 public class ProfessorController {
 
     private ProfessorDAO professorDAO;
+    private DisciplinaDAO disciplinaDAO;
+    private AlunoDAO alunoDAO;
 
     public ProfessorController() {
         this.professorDAO = new ProfessorDAO();
+        this.disciplinaDAO = new DisciplinaDAO();
+        this.alunoDAO = new AlunoDAO();
     }
 
     public void adicionarProfessor(Professor professor) {
@@ -26,16 +32,33 @@ public class ProfessorController {
     }
 
     public List<String> visualizarDisciplinasLecionadas(Professor professor) {
-        return professor.getDisciplinas().stream()
+        List<Disciplina> todasDisciplinas = disciplinaDAO.carregarDisciplinas();
+
+        return todasDisciplinas.stream()
+                .filter(disciplina -> disciplina.getProfessor() != null
+                        && disciplina.getProfessor().getNome().equals(professor.getNome()))
                 .map(Disciplina::getNome)
                 .collect(Collectors.toList());
     }
 
     public Map<String, List<Aluno>> visualizarAlunosPorDisciplina(Professor professor) {
-        return professor.getDisciplinas().stream()
+        List<Disciplina> todasDisciplinas = disciplinaDAO.carregarDisciplinas();
+        List<Aluno> todosAlunos = alunoDAO.carregarAlunos();
+
+
+        List<Disciplina> disciplinasLecionadas = todasDisciplinas.stream()
+                .filter(disciplina -> disciplina.getProfessor() != null
+                        && disciplina.getProfessor().getNome().equals(professor.getNome()))
+                .collect(Collectors.toList());
+
+
+        return disciplinasLecionadas.stream()
                 .collect(Collectors.toMap(
                         Disciplina::getNome,
-                        Disciplina::getAlunos
+                        disciplina -> todosAlunos.stream()
+                                .filter(aluno -> aluno.getDisciplinasMatriculadas().stream()
+                                        .anyMatch(d -> d.getNome().equals(disciplina.getNome())))
+                                .collect(Collectors.toList())
                 ));
     }
 }

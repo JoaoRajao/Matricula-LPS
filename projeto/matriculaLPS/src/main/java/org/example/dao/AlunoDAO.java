@@ -5,7 +5,6 @@ import org.example.model.Curso;
 import org.example.model.Disciplina;
 import org.example.model.TipoDisciplina;
 
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +29,6 @@ public class AlunoDAO {
         if (!alunoExiste) {
             alunos.add(aluno);
         }
-
 
         List<String> linhas = new ArrayList<>();
         for (Aluno a : alunos) {
@@ -65,25 +63,27 @@ public class AlunoDAO {
                 String login = dados[3];
                 String senha = dados[4];
 
-
                 Curso curso = new Curso(nomeCurso, 240);
                 Aluno aluno = new Aluno(nome, matricula, curso, login, senha);
-
 
                 if (dados.length > 5) {
                     String[] disciplinasDados = dados[5].split(",");
                     for (String discData : disciplinasDados) {
-                        String[] parts = discData.split("\\(");
-                        String nomeDisciplina = parts[0].trim();
-                        String tipoStr = parts[1].substring(0, 1); // Obtém apenas 'O' ou 'P'
+                        if (discData.contains("(") && discData.contains(")")) {
+                            String[] parts = discData.split("\\(");
+                            String nomeDisciplina = parts[0].trim();
+                            String tipoStr = parts[1].substring(0, 1); // Obtém apenas 'O' ou 'P'
 
-                        TipoDisciplina tipo = tipoStr.equals("O") ? TipoDisciplina.OBRIGATORIA : TipoDisciplina.OPTATIVA;
-                        Disciplina disciplina = new Disciplina(nomeDisciplina, 0, null, tipo);
+                            TipoDisciplina tipo = tipoStr.equals("O") ? TipoDisciplina.OBRIGATORIA : TipoDisciplina.OPTATIVA;
+                            Disciplina disciplina = new Disciplina(nomeDisciplina, 0, null, tipo);
 
-                        if (tipo == TipoDisciplina.OBRIGATORIA) {
-                            aluno.getDisciplinasObrigatorias().add(disciplina);
+                            if (tipo == TipoDisciplina.OBRIGATORIA) {
+                                aluno.getDisciplinasObrigatorias().add(disciplina);
+                            } else {
+                                aluno.getDisciplinasOptativas().add(disciplina);
+                            }
                         } else {
-                            aluno.getDisciplinasOptativas().add(disciplina);
+                            System.out.println("Formato de disciplina incorreto: " + discData);
                         }
                     }
                 }
