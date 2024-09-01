@@ -11,13 +11,33 @@ public class ProfessorDAO {
     private static final String FILE_NAME = "professores.txt";
 
     public void salvarProfessor(Professor professor) {
+        List<Professor> professores = carregarProfessores();
+        boolean professorExiste = false;
+
+        for (int i = 0; i < professores.size(); i++) {
+            Professor p = professores.get(i);
+            if (p.getId().equals(professor.getId())) {
+                professores.set(i, professor);
+                professorExiste = true;
+                break;
+            }
+        }
+
+        if (!professorExiste) {
+            professores.add(professor);
+        }
+
+        List<String> linhas = new ArrayList<>();
+        for (Professor p : professores) {
+            linhas.add(p.toString());
+        }
+
         try {
-            ArquivoUtil.adicionarLinha(FILE_NAME, professor.toString());
+            ArquivoUtil.escreverArquivo(FILE_NAME, linhas);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
     public List<Professor> carregarProfessores() {
         List<Professor> professores = new ArrayList<>();
         try {

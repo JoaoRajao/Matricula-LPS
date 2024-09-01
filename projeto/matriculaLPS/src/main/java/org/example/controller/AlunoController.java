@@ -1,6 +1,7 @@
 package org.example.controller;
 
 import org.example.dao.AlunoDAO;
+import org.example.dao.DisciplinaDAO;
 import org.example.model.Aluno;
 import org.example.model.Disciplina;
 import org.example.model.TipoDisciplina;
@@ -25,6 +26,14 @@ public class AlunoController {
         return alunoDAO.carregarAlunos();
     }
 
+    public void salvarAluno(Aluno aluno) {
+        alunoDAO.salvarAluno(aluno);
+    }
+
+    public List<Disciplina> carregarTodasDisciplinas() {
+        DisciplinaDAO disciplinaDAO = new DisciplinaDAO();
+        return disciplinaDAO.carregarDisciplinas();
+    }
 
 
     public void matricularDisciplinas(Aluno aluno, List<Disciplina> disciplinas) {

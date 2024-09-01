@@ -24,7 +24,6 @@ public class SecretariaControllerTest {
         secretaria = new Secretaria("admin", "senha123");
         curso = new Curso("Engenharia de Software", 240);
         professor = new Professor("Dr. Pedro", "P01", "pedro", "senha789");
-        professor1 = new Professor("Dr. Pedro", "P01", "pedro", "senha789");
         disciplina = new Disciplina("Algoritmos", 4, null, TipoDisciplina.OBRIGATORIA);
         aluno = new Aluno("João", "20220001", curso, "joao", "senha123");
     }
@@ -33,56 +32,56 @@ public class SecretariaControllerTest {
 
     @Test
     public void testAdicionarCurso() {
-        secretariaController.adicionarCurso(secretaria, curso);
+        secretariaController.adicionarCurso( curso);
         assertTrue(secretaria.getCursos().contains(curso));
     }
 
     @Test
     public void testAdicionarProfessor() {
-        secretariaController.adicionarProfessor(secretaria, professor);
+        secretariaController.adicionarProfessor( professor);
         assertTrue(secretaria.getProfessores().contains(professor));
     }
 
     @Test
     public void testAdicionarDisciplina() {
-        secretariaController.adicionarDisciplina(secretaria, disciplina);
+        secretariaController.adicionarDisciplina( disciplina);
         assertTrue(secretaria.getDisciplinas().contains(disciplina));
     }
 
     @Test
     public void testAdicionarAluno() {
-        secretariaController.adicionarAluno(secretaria, aluno);
+        secretariaController.adicionarAluno(aluno);
         assertTrue(secretaria.getAlunos().contains(aluno));
     }
 
     @Test
     public void testListarCursos() {
-        secretariaController.adicionarCurso(secretaria, curso);
-        List<Curso> cursos = secretariaController.listarCursos(secretaria);
+        secretariaController.adicionarCurso(curso);
+        List<Curso> cursos = secretariaController.listarCursos();
         assertEquals(1, cursos.size());
         assertEquals(curso, cursos.get(0));
     }
 
     @Test
     public void testListarProfessores() {
-        secretariaController.adicionarProfessor(secretaria, professor);
-        List<Professor> professores = secretariaController.listarProfessores(secretaria);
+        secretariaController.adicionarProfessor(professor);
+        List<Professor> professores = secretariaController.listarProfessores();
         assertEquals(1, professores.size());
         assertEquals(professor, professores.get(0));
     }
 
     @Test
     public void testListarDisciplinas() {
-        secretariaController.adicionarDisciplina(secretaria, disciplina);
-        List<Disciplina> disciplinas = secretariaController.listarDisciplinas(secretaria);
+        secretariaController.adicionarDisciplina(disciplina);
+        List<Disciplina> disciplinas = secretariaController.listarDisciplinas();
         assertEquals(1, disciplinas.size());
         assertEquals(disciplina, disciplinas.get(0));
     }
 
     @Test
     public void testListarAlunos() {
-        secretariaController.adicionarAluno(secretaria, aluno);
-        List<Aluno> alunos = secretariaController.listarAlunos(secretaria);
+        secretariaController.adicionarAluno(aluno);
+        List<Aluno> alunos = secretariaController.listarAlunos();
         assertEquals(1, alunos.size());
         assertEquals(aluno, alunos.get(0));
     }

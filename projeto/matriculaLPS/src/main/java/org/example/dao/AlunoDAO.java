@@ -15,8 +15,30 @@ public class AlunoDAO {
     private static final String FILE_NAME = "alunos.txt";
 
     public void salvarAluno(Aluno aluno) {
+        List<Aluno> alunos = carregarAlunos();
+        boolean alunoExiste = false;
+
+        for (int i = 0; i < alunos.size(); i++) {
+            Aluno a = alunos.get(i);
+            if (a.getMatricula().equals(aluno.getMatricula())) {
+                alunos.set(i, aluno);
+                alunoExiste = true;
+                break;
+            }
+        }
+
+        if (!alunoExiste) {
+            alunos.add(aluno);
+        }
+
+
+        List<String> linhas = new ArrayList<>();
+        for (Aluno a : alunos) {
+            linhas.add(a.toString());
+        }
+
         try {
-            ArquivoUtil.adicionarLinha(FILE_NAME, aluno.toString());
+            ArquivoUtil.escreverArquivo(FILE_NAME, linhas);
         } catch (IOException e) {
             e.printStackTrace();
         }

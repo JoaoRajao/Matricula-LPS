@@ -11,10 +11,16 @@ public class CursoDAO {
     private static final String FILE_NAME = "cursos.txt";
 
     public void salvarCurso(Curso curso) {
-        try {
-            ArquivoUtil.adicionarLinha(FILE_NAME, curso.toString());
-        } catch (IOException e) {
-            e.printStackTrace();
+        List<Curso> cursos = carregarCursos();
+
+        if (!cursos.contains(curso)) {
+            try {
+                ArquivoUtil.adicionarLinha(FILE_NAME, curso.toString());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("Curso já existente: " + curso.getNome());
         }
     }
 
@@ -23,9 +29,11 @@ public class CursoDAO {
         try {
             List<String> linhas = ArquivoUtil.lerArquivo(FILE_NAME);
             for (String linha : linhas) {
-                String[] dados = linha.split(";");
-                Curso curso = new Curso(dados[0], Integer.parseInt(dados[1]));
-                cursos.add(curso);
+                if (!linha.trim().isEmpty()) { // Verifica se a linha não é vazia
+                    String[] dados = linha.split(";");
+                    Curso curso = new Curso(dados[0], Integer.parseInt(dados[1]));
+                    cursos.add(curso);
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();

@@ -1,5 +1,6 @@
 package org.example.controller;
 
+import org.example.dao.DisciplinaDAO;
 import org.example.model.Aluno;
 import org.example.model.Disciplina;
 import org.example.model.Professor;
@@ -8,6 +9,7 @@ import java.util.List;
 
 public class DisciplinaController {
     private List<Aluno> alunos;
+    DisciplinaDAO disciplinaDAO;
 
     public void adicionarAlunoADisciplina(Disciplina disciplina, Aluno aluno) {
         List<Aluno> alunos = disciplina.getAlunos();
@@ -35,6 +37,10 @@ public class DisciplinaController {
         return disciplina.getAlunos();
     }
 
+    public List<Disciplina> carregarDisciplinas() {
+
+        return disciplinaDAO.carregarDisciplinas();
+    }
 
 
 }

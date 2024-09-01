@@ -1,1 +1,4 @@
-
+cal;2;joao;OBRIGATORIA
+calculo;23;joao;OBRIGATORIA
+popo;2;joao;OBRIGATORIA
+aeds;3;joao;OBRIGATORIA

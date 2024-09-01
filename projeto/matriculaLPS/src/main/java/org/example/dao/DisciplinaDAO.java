@@ -9,18 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DisciplinaDAO {
-
     private static final String FILE_NAME = "disciplinas.txt";
 
-    public void salvarDisciplina(Disciplina disciplina) {
-        try {
-            ArquivoUtil.adicionarLinha(FILE_NAME, disciplina.toString());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public List<Disciplina> carregarDisciplinas(List<Professor> professoresDisponiveis) {
+    public List<Disciplina> carregarDisciplinas() {
+        List<Professor> professoresDisponiveis = new ArrayList<>();
         List<Disciplina> disciplinas = new ArrayList<>();
         try {
             List<String> linhas = ArquivoUtil.lerArquivo(FILE_NAME);
@@ -29,7 +21,7 @@ public class DisciplinaDAO {
                 String nomeDisciplina = dados[0];
                 int creditos = Integer.parseInt(dados[1]);
                 String nomeProfessor = dados[2];
-                TipoDisciplina tipo = TipoDisciplina.valueOf(dados[3]); // Ajuste para carregar o tipo de disciplina
+                TipoDisciplina tipo = TipoDisciplina.valueOf(dados[3]);
 
                 Professor professor = professoresDisponiveis.stream()
                         .filter(p -> p.getNome().equals(nomeProfessor))
@@ -45,6 +37,13 @@ public class DisciplinaDAO {
         return disciplinas;
     }
 
+    public void salvarDisciplina(Disciplina disciplina) {
+        try {
+            ArquivoUtil.adicionarLinha(FILE_NAME, disciplina.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void atualizarArquivo(List<Disciplina> disciplinas) {
         List<String> linhas = new ArrayList<>();
