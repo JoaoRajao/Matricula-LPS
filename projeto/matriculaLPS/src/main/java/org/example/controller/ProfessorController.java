@@ -7,6 +7,7 @@ import org.example.model.Aluno;
 import org.example.model.Disciplina;
 import org.example.model.Professor;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -42,6 +43,7 @@ public class ProfessorController {
     }
 
     public Map<String, List<Aluno>> visualizarAlunosPorDisciplina(Professor professor) {
+
         List<Disciplina> todasDisciplinas = disciplinaDAO.carregarDisciplinas();
         List<Aluno> todosAlunos = alunoDAO.carregarAlunos();
 
@@ -52,13 +54,21 @@ public class ProfessorController {
                 .collect(Collectors.toList());
 
 
-        return disciplinasLecionadas.stream()
-                .collect(Collectors.toMap(
-                        Disciplina::getNome,
-                        disciplina -> todosAlunos.stream()
-                                .filter(aluno -> aluno.getDisciplinasMatriculadas().stream()
-                                        .anyMatch(d -> d.getNome().equals(disciplina.getNome())))
-                                .collect(Collectors.toList())
-                ));
+        Map<String, List<Aluno>> alunosPorDisciplina = new HashMap<>();
+
+        for (Disciplina disciplina : disciplinasLecionadas) {
+            List<Aluno> alunosDaDisciplina = todosAlunos.stream()
+                    .filter(aluno -> aluno.getDisciplinasMatriculadas().stream()
+                            .anyMatch(d -> d.getNome().equals(disciplina.getNome())))
+                    .collect(Collectors.toList());
+
+
+            alunosPorDisciplina.merge(disciplina.getNome(), alunosDaDisciplina, (existing, newAlunos) -> {
+                existing.addAll(newAlunos);
+                return existing;
+            });
+        }
+
+        return alunosPorDisciplina;
     }
 }

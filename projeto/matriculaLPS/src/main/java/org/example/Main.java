@@ -190,7 +190,7 @@ public class Main {
                 System.out.println("2. Adicionar Professor");
                 System.out.println("3. Adicionar Disciplina");
                 System.out.println("4. Adicionar Aluno");
-                System.out.println("5. Verificar Status da Disciplina");
+                System.out.println("5. Verificar Status de Todas as Disciplinas");
                 System.out.println("6. Listar Cursos");
                 System.out.println("7. Listar Professores");
                 System.out.println("8. Listar Disciplinas");
@@ -255,7 +255,6 @@ public class Main {
                         secretariaController.adicionarDisciplina(disciplina);
                         secretariaController.adicionarDisciplinaAoProfessor(disciplina, professorDisciplina);
 
-
                         System.out.print("Digite o nome do curso para associar à disciplina: ");
                         String nomeCursoDisc = scanner.nextLine();
                         Curso cursoDisciplina = null;
@@ -279,8 +278,6 @@ public class Main {
                         System.out.println("Disciplina adicionada e associada ao professor com sucesso!");
                         break;
 
-
-
                     case 4:
                         System.out.print("Digite o nome do aluno: ");
                         String nomeAluno = scanner.nextLine();
@@ -293,8 +290,8 @@ public class Main {
                         System.out.print("Digite o nome do curso do aluno: ");
                         String nomeCursoAluno = scanner.nextLine();
                         Curso cursoAluno = null;
-                        for (Curso c : secretaria.getCursos()) {
-                            if (c.getNome().equals(nomeCursoAluno)) {
+                        for (Curso c : secretariaController.listarCursos()) {
+                            if (c.getNome().equalsIgnoreCase(nomeCursoAluno)) {
                                 cursoAluno = c;
                                 break;
                             }
@@ -304,26 +301,13 @@ public class Main {
                             break;
                         }
                         Aluno aluno = new Aluno(nomeAluno, matriculaAluno, cursoAluno, loginAluno, senhaAluno);
-                        secretariaController.adicionarAluno( aluno);
+                        secretariaController.adicionarAluno(aluno);
                         System.out.println("Aluno adicionado com sucesso!");
                         break;
 
                     case 5:
-                        System.out.print("Digite o nome da disciplina para verificar o status: ");
-                        String nomeVerificarDisciplina = scanner.nextLine();
-                        Disciplina disciplinaVerificar = null;
-                        for (Disciplina d : secretaria.getDisciplinas()) {
-                            if (d.getNome().equals(nomeVerificarDisciplina)) {
-                                disciplinaVerificar = d;
-                                break;
-                            }
-                        }
-                        if (disciplinaVerificar != null) {
-                            boolean status = secretariaController.verificarStatusDisciplina(disciplinaVerificar);
-                            System.out.println("Status da disciplina " + nomeVerificarDisciplina + ": " + (status ? "Ativa" : "Inativa"));
-                        } else {
-                            System.out.println("Disciplina não encontrada.");
-                        }
+                        secretariaController.verificarStatusDeTodasAsDisciplinas();
+                        System.out.println("Status de todas as disciplinas verificado e atualizado.");
                         break;
 
                     case 6:

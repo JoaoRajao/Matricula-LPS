@@ -72,7 +72,7 @@ public class AlunoDAO {
                         if (discData.contains("(") && discData.contains(")")) {
                             String[] parts = discData.split("\\(");
                             String nomeDisciplina = parts[0].trim();
-                            String tipoStr = parts[1].substring(0, 1); // Obtém apenas 'O' ou 'P'
+                            String tipoStr = parts[1].substring(0, 1);
 
                             TipoDisciplina tipo = tipoStr.equals("O") ? TipoDisciplina.OBRIGATORIA : TipoDisciplina.OPTATIVA;
                             Disciplina disciplina = new Disciplina(nomeDisciplina, 0, null, tipo);

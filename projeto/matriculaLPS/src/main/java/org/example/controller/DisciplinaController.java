@@ -8,20 +8,22 @@ import org.example.model.Professor;
 import java.util.List;
 
 public class DisciplinaController {
-    private List<Aluno> alunos;
-    DisciplinaDAO disciplinaDAO;
+    private DisciplinaDAO disciplinaDAO;
+
+    public DisciplinaController() {
+        this.disciplinaDAO = new DisciplinaDAO();
+    }
 
     public void adicionarAlunoADisciplina(Disciplina disciplina, Aluno aluno) {
-        List<Aluno> alunos = disciplina.getAlunos();
-        if (alunos.size() < disciplina.getMaxAlunos() && !alunos.contains(aluno)) {
-            alunos.add(aluno);
-        }
+        disciplina.addAluno(aluno);
+        disciplinaDAO.salvarDisciplina(disciplina);
     }
 
     public void removerAlunoDaDisciplina(Disciplina disciplina, Aluno aluno) {
         List<Aluno> alunos = disciplina.getAlunos();
         if (alunos.contains(aluno)) {
             alunos.remove(aluno);
+            disciplinaDAO.salvarDisciplina(disciplina);
         }
     }
 
@@ -31,6 +33,7 @@ public class DisciplinaController {
 
     public void alterarProfessorDaDisciplina(Disciplina disciplina, Professor professor) {
         disciplina.setProfessor(professor);
+        disciplinaDAO.salvarDisciplina(disciplina);
     }
 
     public List<Aluno> listarAlunosDaDisciplina(Disciplina disciplina) {
@@ -38,11 +41,11 @@ public class DisciplinaController {
     }
 
     public List<Disciplina> carregarDisciplinas() {
-
         return disciplinaDAO.carregarDisciplinas();
     }
 
-
+    public void verificarEAtualizarStatusDisciplina(Disciplina disciplina) {
+        disciplina.verificarStatus();
+        disciplinaDAO.salvarDisciplina(disciplina);
+    }
 }
-
-

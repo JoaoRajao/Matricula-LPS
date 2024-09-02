@@ -19,15 +19,39 @@ public class DisciplinaDAO {
     public List<Disciplina> carregarDisciplinas() {
         List<Professor> professoresDisponiveis = professorDAO.carregarProfessores();
         List<Disciplina> disciplinas = new ArrayList<>();
+
         try {
             List<String> linhas = ArquivoUtil.lerArquivo(FILE_NAME);
             for (String linha : linhas) {
-                String[] dados = linha.split(";");
-                String nomeDisciplina = dados[0];
-                int creditos = Integer.parseInt(dados[1]);
-                String nomeProfessor = dados[2];
-                TipoDisciplina tipo = TipoDisciplina.valueOf(dados[3]);
+                if (linha.trim().isEmpty()) {
+                    continue;
+                }
 
+                String[] dados = linha.split(";");
+
+
+                if (dados.length < 4) {
+                    System.out.println("Linha com formato incorreto: " + linha);
+                    continue;
+                }
+
+                String nomeDisciplina = dados[0];
+                int creditos;
+                try {
+                    creditos = Integer.parseInt(dados[1]);
+                } catch (NumberFormatException e) {
+                    System.out.println("Número de créditos inválido: " + dados[1]);
+                    continue;
+                }
+
+                String nomeProfessor = dados[2];
+                TipoDisciplina tipo;
+                try {
+                    tipo = TipoDisciplina.valueOf(dados[3]);
+                } catch (IllegalArgumentException e) {
+                    System.out.println("Tipo de disciplina inválido: " + dados[3]);
+                    continue;
+                }
 
                 Professor professor = professoresDisponiveis.stream()
                         .filter(p -> p.getNome().equals(nomeProfessor))

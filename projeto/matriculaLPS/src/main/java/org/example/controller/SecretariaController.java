@@ -8,7 +8,6 @@ import org.example.model.Aluno;
 import org.example.model.Curso;
 import org.example.model.Disciplina;
 import org.example.model.Professor;
-import org.example.model.Secretaria;
 
 import java.util.List;
 
@@ -61,12 +60,26 @@ public class SecretariaController {
         return professorDAO.carregarProfessores();
     }
 
-    public  List<Disciplina> listarDisciplinas() {
+    public List<Disciplina> listarDisciplinas() {
         return disciplinaDAO.carregarDisciplinas();
     }
 
     public List<Aluno> listarAlunos() {
         return alunoDAO.carregarAlunos();
+    }
+
+    public void verificarStatusDeTodasAsDisciplinas() {
+        List<Disciplina> disciplinas = listarDisciplinas();
+        for (Disciplina disciplina : disciplinas) {
+            boolean statusOriginal = disciplina.isAtiva();
+            disciplina.verificarStatus();
+            if (statusOriginal != disciplina.isAtiva()) {
+                disciplinaDAO.salvarDisciplina(disciplina);
+                if (!disciplina.isAtiva()) {
+                    System.out.println("Disciplina " + disciplina.getNome() + " cancelada por falta de alunos.");
+                }
+            }
+        }
     }
 
     public boolean verificarStatusDisciplina(Disciplina disciplina) {

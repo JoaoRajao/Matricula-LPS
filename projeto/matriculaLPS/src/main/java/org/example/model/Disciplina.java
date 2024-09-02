@@ -84,8 +84,28 @@ public class Disciplina {
         this.inscricoesEncerradas = inscricoesEncerradas;
     }
 
+    public void addAluno(Aluno aluno) {
+        if (!inscricoesEncerradas && alunos.size() < maxAlunos) {
+            alunos.add(aluno);
+            if (alunos.size() >= maxAlunos) {
+                inscricoesEncerradas = true;
+            }
+        } else {
+            System.out.println("Não é possível adicionar mais alunos. Inscrições encerradas ou número máximo de alunos atingido.");
+        }
+    }
+
+    public void verificarStatus() {
+        if (alunos.size() >= minAlunos) {
+            ativa = true;
+        } else {
+            ativa = false;
+            System.out.println("Disciplina " + nome + " cancelada por falta de alunos.");
+        }
+    }
+
     @Override
     public String toString() {
-        return nome + ";" + creditos + ";" + professor.getNome() + ";" + tipo;
+        return nome + ";" + creditos + ";" + (professor != null ? professor.getNome() : "Sem Professor") + ";" + tipo;
     }
 }
